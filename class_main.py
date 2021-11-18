@@ -1,7 +1,6 @@
 import hashlib
 from easygui import passwordbox
 from gestion_files import *
-from project_class.User import *
 import sys
 
 
