@@ -1,10 +1,11 @@
 import hashlib
 from easygui import passwordbox
-from gestion_files import *
+from Functions.gestion_files import *
 import sys
+import os
 
 
-def login():
+def login(chemin_main):
     '''
     ---> main function : lance le programme principal.
     ---> demande a l'utilisateur de se connecter ou s'inscrire et lance des appels aux fonctions adéquates.
@@ -12,17 +13,17 @@ def login():
     Pre :   - user_input doit valoir I/inscription ou C/connexion.
     Post :  -
     '''
-
+    path = chemin_main
     while True:
         user_input = input("Inscription/Connexion: ")
         if user_input == "Inscription" or user_input == "inscription":
-            inscription()
+            inscription(path)
 
         if user_input == "Connexion" or user_input == "connexion":
-            connexion()
+            connexion(path)
 
 
-def inscription():
+def inscription(chemin_main):
     '''
     ---> gère l'inscription de l'utilisateur
     ---> appel fonction check_email_validation -> vérifier si le champ saisi est de type mail.
@@ -34,6 +35,7 @@ def inscription():
 
     Post : -
     '''
+    path = chemin_main
     sortir_inscription = -1
 
     while sortir_inscription < 0:
@@ -41,10 +43,10 @@ def inscription():
 
         if check_email_validation(email):
 
-            if not check_email_exist(file="DataBase", email=email):
-                check_inscription_pswd = inscription_pswd()
+            if not check_email_exist(path,'Data',file="DataBase", email=email):
+                check_inscription_pswd = inscription_pswd(chemin_main)
                 if check_inscription_pswd:
-                    write_file(file="DataBase", email=email, password=check_inscription_pswd.hexdigest())
+                    write_file(path,'Data',file="DataBase", email=email, password=check_inscription_pswd.hexdigest())
                     print("Votre inscription a bien été enregistrée ! \n")
                     sortir_inscription = 1
 
@@ -57,7 +59,7 @@ def inscription():
             sortir_inscription = -1
 
 
-def inscription_pswd():
+def inscription_pswd(chemin_main):
     '''
     ---> fonction permettant a l'utilisateur de créer son mot de passe pour s'identifier par la suite
 
@@ -68,7 +70,7 @@ def inscription_pswd():
 
     Post : renvoi le mot de passe si hash_pswd == hash__pswd
     '''
-
+    path = chemin_main
     out_password = -1
 
     while out_password < 0:
@@ -86,14 +88,14 @@ def inscription_pswd():
 
         except AttributeError:
             print("vous avez quitté la saisie du mot de passe")
-            login()
+            login(path)
             out_password = 1
 
         except IOError:
             print("une erreur s'est produite...")
 
 
-def connexion():
+def connexion(chemin_main):
     '''
     ---> fonction qui permet à, l'utilisateur de se loguer.
     ---> appel fonction check_email_exist pour vérifier si l'email saisi est valide.
@@ -106,9 +108,9 @@ def connexion():
     '''
     tab = []
     dict = {}
-
+    path = chemin_main + "\\" + 'Data' + "\\" + 'DataBase'
     try:
-        with open("DataBase") as file:
+        with open(path) as file:
             for line in file:
                 tab.append(line.rstrip().split())
 
@@ -129,7 +131,7 @@ def connexion():
 
         email = input("veuillez saisir une adresse valide :")
 
-        if check_email_exist(file="DataBase", email=email):
+        if check_email_exist(chemin_main,'Data',file="DataBase", email=email):
 
             email_valide = email
 

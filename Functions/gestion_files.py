@@ -1,4 +1,4 @@
-def write_file(file, email, password):
+def write_file(chemin, folder, file, email, password):
     '''
     ---> permet d'écrire dans le fichier de DB contenant les infos des utilisateurs.
 
@@ -9,7 +9,8 @@ def write_file(file, email, password):
     Pre :   file (le nom de fichier saisi) doit exister.
     Post :  l'email et le password doivent etre enregistrés dans le fichier file saisi en poramètre.
     '''
-    file = open(file, "a")
+    path = chemin + "\\" + folder + "\\" + file
+    file = open(path, "a")
     file.write(email + '  ' + password + '\n')
     file.close()
 
@@ -28,7 +29,7 @@ def check_email_validation(email):
         return True
 
 
-def check_email_exist(file, email):
+def check_email_exist(chemin, folder, file, email):
     '''
     ---> permet de vérifier si l'adresse email saisie est déja utilisée ou non.
 
@@ -40,11 +41,11 @@ def check_email_exist(file, email):
     Pre :   file (le nom de fichier saisi) doit exister.
     Post : -
     '''
-
+    path = chemin + "\\" + folder + "\\" + file
     emails_tab = []
     tab = []
     try:
-        with open(file, "r") as file:
+        with open(path, "r") as file:
             for lines in file:
                 tab.append(lines.rstrip().split())
 
