@@ -21,7 +21,8 @@ def login(chemin_main):
 
         if user_input == "Connexion" or user_input == "connexion":
             connexion(path)
-
+        if user_input == "exit()":
+            break
 
 def inscription(chemin_main):
     '''
