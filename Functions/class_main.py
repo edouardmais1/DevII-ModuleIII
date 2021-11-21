@@ -39,23 +39,23 @@ def inscription(chemin_main):
     sortir_inscription = -1
 
     while sortir_inscription < 0:
-        email = input("veuillez saisir une adresse email valide (@ephec) :")
-
+        email = input("Veuillez saisir une adresse email valide (@ephec): ")
+        if(email == "exit()"):
+            break
         if check_email_validation(email):
-
             if not check_email_exist(path,'Data',file="DataBase", email=email):
                 check_inscription_pswd = inscription_pswd(chemin_main)
                 if check_inscription_pswd:
                     write_file(path,'Data',file="DataBase", email=email, password=check_inscription_pswd.hexdigest())
-                    print("Votre inscription a bien été enregistrée ! \n")
+                    print("Votre inscription a bien été enregistrée !\n")
                     sortir_inscription = 1
 
             else:
-                print("l'adresse saisie éxiste déja... veuillez réessayer :")
+                print("L'adresse saisie éxiste déja...\nVeuillez réessayer: ")
                 sortir_inscription = -1
 
         else:
-            print("veuillez saisir une adresse mail valide...")
+            print("Veuillez saisir une adresse mail valide...")
             sortir_inscription = -1
 
 
@@ -76,23 +76,27 @@ def inscription_pswd(chemin_main):
     while out_password < 0:
         try:
             pswd = passwordbox('Password: ')
+            if pswd == "exit()":
+                break
             hash_pswd = hashlib.md5(pswd.encode())
             check_pswd = passwordbox('Check Password: ')
+            if check_pswd == "exit()":
+                break
             hash_check_pswd = hashlib.md5(check_pswd.encode())
             if hash_check_pswd.hexdigest() == hash_pswd.hexdigest():
                 out_password = 1
                 return hash_pswd
             else:
-                print("veuillez saisir 2 fois le meme mot de passe")
+                print("Veuillez saisir 2 fois le même mot de passe: ")
                 out_password = -1
 
         except AttributeError:
-            print("vous avez quitté la saisie du mot de passe")
+            print("Vous avez quitté la saisie du mot de passe.")
             login(path)
             out_password = 1
 
         except IOError:
-            print("une erreur s'est produite...")
+            print("Une erreur s'est produite...")
 
 
 def connexion(chemin_main):
@@ -118,10 +122,10 @@ def connexion(chemin_main):
                 dict[elem[0]] = elem[1]
 
     except FileNotFoundError:
-        print('fichier introuvable')
+        print('Fichier introuvable')
 
     except IOError:
-        print("impossible d'ouvrir le fichier...")
+        print("Impossible d'ouvrir le fichier...")
 
     except IndexError:
         pass
@@ -129,8 +133,9 @@ def connexion(chemin_main):
     out_connexion = -1
     while out_connexion < 1:
 
-        email = input("veuillez saisir une adresse valide :")
-
+        email = input("Veuillez saisir une adresse valide: ")
+        if email == "exit()":
+            break
         if check_email_exist(chemin_main,'Data',file="DataBase", email=email):
 
             email_valide = email
@@ -138,26 +143,26 @@ def connexion(chemin_main):
             out_password = -1
             while out_password < 0:
                 try:
-                    password = passwordbox('Password :')
+                    password = passwordbox('Password: ')
 
                     if hashlib.md5(password.encode()).hexdigest() == dict[email_valide]:
-                        print("vous etes connectés")
+                        print("Vous êtes connectés !")
                         out_password = 1
                         out_connexion = 1
 
                         sys.exit()
 
                     else:
-                        print("mot de passe ou email invalide...")
+                        print("Mot de passe ou adresse email invalide...")
                         out_password = -1
 
                 except AttributeError:
-                    print("vous avez quitté la saisie de mot de passe")
+                    print("Vous avez quitté la saisie de mot de passe.")
                     out_password = -1
 
                 except IOError:
-                    print("une erreur s'est produite")
+                    print("Une erreur s'est produite.")
 
         else:
-            print("adresse email introuvable... veuillez réessayer")
+            print("Adresse email introuvable...")
             out_connexion = -1
