@@ -24,6 +24,7 @@ def login(chemin_main):
         if user_input == "exit()":
             break
 
+
 def inscription(chemin_main):
     '''
     ---> gère l'inscription de l'utilisateur
@@ -41,13 +42,13 @@ def inscription(chemin_main):
 
     while sortir_inscription < 0:
         email = input("Veuillez saisir une adresse email valide (@ephec): ")
-        if(email == "exit()"):
+        if (email == "exit()"):
             break
         if check_email_validation(email):
-            if not check_email_exist(path,'Data',file="DataBase", email=email):
+            if not check_email_exist(path, 'Data', file="DataBase", email=email):
                 check_inscription_pswd = inscription_pswd(chemin_main)
                 if check_inscription_pswd:
-                    write_file(path,'Data',file="DataBase", email=email, password=check_inscription_pswd.hexdigest())
+                    write_file(path, 'Data', file="DataBase", email=email, password=check_inscription_pswd.hexdigest())
                     print("Votre inscription a bien été enregistrée !\n")
                     sortir_inscription = 1
 
@@ -60,7 +61,7 @@ def inscription(chemin_main):
             sortir_inscription = -1
 
 
-def inscription_pswd(chemin_main):
+def inscription_pswd(chemin_main):  #optimiser le check du password (caractères spéciaux, Maj, taille du mdp)
     '''
     ---> fonction permettant a l'utilisateur de créer son mot de passe pour s'identifier par la suite
 
@@ -137,7 +138,7 @@ def connexion(chemin_main):
         email = input("Veuillez saisir une adresse valide: ")
         if email == "exit()":
             break
-        if check_email_exist(chemin_main,'Data',file="DataBase", email=email):
+        if check_email_exist(chemin_main, 'Data', file="DataBase", email=email):
 
             email_valide = email
 

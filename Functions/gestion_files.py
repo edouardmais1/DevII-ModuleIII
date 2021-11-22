@@ -15,7 +15,7 @@ def write_file(chemin, folder, file, email, password):
     file.close()
 
 
-def check_email_validation(email):
+def check_email_validation(email):  # tester la validité de l'adresse plus en profondeur
     '''
     ---> vérifier si l'email saisi par l'utilisateur est valide ou non (de type @mail).
 
