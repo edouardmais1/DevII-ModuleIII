@@ -1,8 +1,10 @@
-from kivy.lang import Builder
-from kivymd.app import MDapp
+import kivy
+from kivy.app import App
+from kivy.uix.label import Label
 
-class mainWindow(MDapp):
+class mainWindow(App):
     def build(self):
-        self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Blue"
-        return Builder.load_file('mainWindow.kv')
+        return Label(text="test")
+
+if __name__ == "__main__":
+    mainWindow().run()
