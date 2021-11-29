@@ -18,10 +18,6 @@ class Email:
         nom = get_nom()
         self.__userName = prenom[0] + "." + nom
 
-    def checkEmail(self, emailEphec):
-        pass
-
-
 
 #comment vérifier si le prenom et le nom appartiennent à un éleve ?
 
@@ -75,7 +71,3 @@ def get_nom():
                 else:
                     print("veuillez réessayer...")
                     out_validation = -1
-
-test = Email()
-test.setUserName()
-print(test.getUserName())
