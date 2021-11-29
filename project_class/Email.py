@@ -1,7 +1,7 @@
 class Email:
     def __init__(self):
-        self.__userName = ''
-        self.__emailEphec = ''
+        self.__userName = ""
+        self.__emailEphec = ""
 
     def getEmail(self):
         return self.__emailEphec
@@ -18,9 +18,7 @@ class Email:
         nom = get_nom()
         self.__userName = prenom[0] + "." + nom
 
-
 #comment vérifier si le prenom et le nom appartiennent à un éleve ?
-
 def get_prenom():
     """
     ---> fonction permettant d'obtenir le prénom du nouvel utilisateur

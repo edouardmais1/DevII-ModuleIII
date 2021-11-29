@@ -8,8 +8,5 @@ class Password:
     def setPassword(self):
         pass
 
-    def checkPassword(self):
-        pass
-
-    def hashPassword(self):
-        pass
+def hashPassword(self):
+    pass
