@@ -10,6 +10,8 @@ class Email:
         return self.__userName
 
     def setEmail(self):
+        pass
+
 
     def setUserName(self):
         prenom = get_prenom()
