@@ -1,7 +1,4 @@
-import re
-
-regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-
+from random import randint
 
 class Email:
     def __init__(self):
@@ -12,17 +9,18 @@ class Email:
         return self.__emailEphec
 
     def setEmail(self):
+        correct_mail = str(self.__userName) + "@students.ephec.be"
         out_input = -1
-        while out_input < 1:
-            mail = input("veuillez saisir votre mail ephec personnelle de type (initialePrenom.Nom@students.ephec.be :")
+        while out_input < 0:
+            email = input("veuillez saisir votre adresse mail ephec personnelle (InitialePrenom.Nom@students.ephec.be :")
 
-            if re.search(regex, mail):
-                print("valid email")
-                return mail
+            if email == correct_mail:
+                return True
 
             else:
-                print("invalid email")
+                print("email saisi non conforme aux données rentrées")
                 out_input = -1
+
 
     def setUserName(self):
         prenom = get_prenom()
@@ -32,6 +30,10 @@ class Email:
     def getUserName(self):
         return self.__userName
 
+
+
+
+#------------------Email Functions---------------------
 
 def get_prenom():
     """
@@ -52,7 +54,7 @@ def get_prenom():
                 validation_prenom = input("veuillez valider le prénom saisi :")
 
                 if prenom == validation_prenom:
-                    return validation_prenom
+                    return validation_prenom.lower()
 
                 else:
                     print("veuillez réessayer...")
@@ -78,12 +80,17 @@ def get_nom():
                 validation_nom = input("veuillez valider le nom saisi :")
 
                 if nom == validation_nom:
-                    return validation_nom
+                    return validation_nom.lower()
 
                 else:
                     print("veuillez réessayer...")
                     out_validation = -1
 
-test = Email()
-test.setEmail()
-print(test.getEmail())
+
+def get_email_validation():
+
+    validation_code = randint(1000, 9999)
+    return validation_code
+
+
+print(get_email_validation())
