@@ -1,3 +1,8 @@
+import re
+
+regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+
+
 class Email:
     def __init__(self):
         self.__userName = ""
@@ -6,19 +11,28 @@ class Email:
     def getEmail(self):
         return self.__emailEphec
 
-    def getUserName(self):
-        return self.__userName
-
     def setEmail(self):
-        pass
+        out_input = -1
+        while out_input < 1:
+            mail = input("veuillez saisir votre mail ephec personnelle de type (initialePrenom.Nom@students.ephec.be :")
 
+            if re.search(regex, mail):
+                print("valid email")
+                return mail
+
+            else:
+                print("invalid email")
+                out_input = -1
 
     def setUserName(self):
         prenom = get_prenom()
         nom = get_nom()
         self.__userName = prenom[0] + "." + nom
 
-#comment vérifier si le prenom et le nom appartiennent à un éleve ?
+    def getUserName(self):
+        return self.__userName
+
+
 def get_prenom():
     """
     ---> fonction permettant d'obtenir le prénom du nouvel utilisateur
@@ -69,3 +83,7 @@ def get_nom():
                 else:
                     print("veuillez réessayer...")
                     out_validation = -1
+
+test = Email()
+test.setEmail()
+print(test.getEmail())
