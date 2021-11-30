@@ -1,5 +1,7 @@
 from random import randint
 import smtplib
+import sys
+
 
 class Email:
     def __init__(self):
@@ -16,7 +18,19 @@ class Email:
             email = input("veuillez saisir votre adresse mail ephec personnelle (InitialePrenom.Nom@students.ephec.be :")
 
             if email == correct_mail:
-                get_email_validation(email)
+                for j in range(2):
+                    code = get_email_validation(email)
+
+                    for i in range(2):
+                        input_user = input("veuillez saisir le code saisi par mail (2 tentatives) :")
+
+                        if input_user ==  "exit":
+                            sys.exit()
+
+                        elif int(input_user) == code:
+                            print("ok merci")
+                            #get_password()
+
 
             else:
                 print("email saisi non conforme aux données rentrées")
@@ -102,7 +116,13 @@ def get_email_validation(email):
         message = f"Subject: {subject}\n\n{body}"
 
         smtp_server.sendmail(sender_address, receiver_address, message)
+        return validation_code
 
 
 
-print(get_email_validation("g.falla@revosta.com"))
+
+
+test = Email()
+test.setUserName()
+test.setEmail()
+print(test.getEmail(), test.getUserName())

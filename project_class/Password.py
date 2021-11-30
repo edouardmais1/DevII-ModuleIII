@@ -10,3 +10,12 @@ class Password:
 
 def hashPassword(self):
     pass
+
+
+
+
+def get_password():
+    pass
+
+def send_password():
+    pass
