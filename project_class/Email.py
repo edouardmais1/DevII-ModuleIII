@@ -1,4 +1,5 @@
 from random import randint
+import smtplib
 
 class Email:
     def __init__(self):
@@ -15,7 +16,7 @@ class Email:
             email = input("veuillez saisir votre adresse mail ephec personnelle (InitialePrenom.Nom@students.ephec.be :")
 
             if email == correct_mail:
-                return True
+                get_email_validation(email)
 
             else:
                 print("email saisi non conforme aux données rentrées")
@@ -87,10 +88,21 @@ def get_nom():
                     out_validation = -1
 
 
-def get_email_validation():
-
+def get_email_validation(email):
     validation_code = randint(1000, 9999)
-    return validation_code
+
+    sender_address = "noreply@revosta.com"
+    receiver_address = email
+    account_password = "xso4%J91"
+    subject = "Email verification"
+    body = "Salut poto!\n\nEntre ce code pour verifier ton compte : {}!\nWith regards,\n\tDeveloper".format(validation_code)
+
+    with smtplib.SMTP_SSL("smtp.revosta.com", 465) as smtp_server:
+        smtp_server.login(sender_address, account_password)
+        message = f"Subject: {subject}\n\n{body}"
+
+        smtp_server.sendmail(sender_address, receiver_address, message)
 
 
-print(get_email_validation())
+
+print(get_email_validation("g.falla@revosta.com"))
