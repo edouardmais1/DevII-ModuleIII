@@ -1,8 +1,10 @@
 import hashlib
 from easygui import passwordbox
 from Functions.gestion_files import *
+from project_class.Email import *
 import sys
 import os
+
 
 
 def login(chemin_main):
@@ -41,14 +43,13 @@ def inscription(chemin_main):
     sortir_inscription = -1
 
     while sortir_inscription < 0:
-        email = input("Veuillez saisir une adresse email valide (@ephec): ")
-        if (email == "exit()"):
-            break
-        if check_email_validation(email):
-            if not check_email_exist(path, 'Data', file="DataBase", email=email):
+        new_email = Email()
+        new_email.setUserName()
+        if new_email.setEmail():
+            if not check_email_exist(path, 'Data', file="DataBase", email=new_email):
                 check_inscription_pswd = inscription_pswd(chemin_main)
                 if check_inscription_pswd:
-                    write_file(path, 'Data', file="DataBase", email=email, password=check_inscription_pswd.hexdigest())
+                    write_file(path, 'Data', file="DataBase", email=new_email.getEmail(), password=new_email.getUserName())
                     print("Votre inscription a bien été enregistrée !\n")
                     sortir_inscription = 1
 

@@ -15,25 +15,26 @@ class Email:
         correct_mail = str(self.__userName) + "@students.ephec.be"
         out_input = -1
         while out_input < 0:
-            email = input("veuillez saisir votre adresse mail ephec personnelle (InitialePrenom.Nom@students.ephec.be :")
-
+            email = input("Veuillez saisir votre adresse mail ephec personnelle "
+                          "(InitialePrenom.Nom@students.ephec.be): ")
             if email == correct_mail:
                 for j in range(2):
                     code = get_email_validation(email)
 
-                    for i in range(2):
-                        input_user = input("veuillez saisir le code saisi par mail (2 tentatives) :")
-
-                        if input_user ==  "exit":
+                    for i in range(2, 0, -1):
+                        input_user = input("Veuillez saisir le code reçu par mail(" + str(i)
+                                           + " tentatives restantes): ")
+                        if input_user == "exit":
                             sys.exit()
 
                         elif int(input_user) == code:
-                            print("ok merci")
+                            print("ok merci !")
+                            return True
                             #get_password()
 
 
             else:
-                print("email saisi non conforme aux données rentrées")
+                print("Email saisi non conforme aux données rentrées ...")
                 out_input = -1
 
 
@@ -57,22 +58,22 @@ def get_prenom():
     out_input = -1
 
     while out_input < 0:
-        prenom = input("veuillez rentrer votre prenom :")
+        prenom = input("Veuillez rentrer votre prenom: ")
 
         if any(elem.isdigit() for elem in prenom):
-            print("veuillez saisir un prénom valide...")
+            print("Veuillez saisir un prénom valide ...")
             out_input = -1
 
         else:
             out_validation = -1
             while out_validation < 0:
-                validation_prenom = input("veuillez valider le prénom saisi :")
+                validation_prenom = input("Veuillez valider le prénom saisi: ")
 
                 if prenom == validation_prenom:
                     return validation_prenom.lower()
 
                 else:
-                    print("veuillez réessayer...")
+                    print("Veuillez réessayer ...")
                     out_validation = -1
 
 
@@ -83,16 +84,16 @@ def get_nom():
     out_input = -1
 
     while out_input < 0:
-        nom = input("veuillez rentrer votre nom :")
+        nom = input("Veuillez rentrer votre nom: ")
 
         if any(elem.isdigit() for elem in nom):
-            print("veuillez saisir un nom valide...")
+            print("Veuillez saisir un nom valide ...")
             out_input = -1
 
         else:
             out_validation = -1
             while out_validation < 0:
-                validation_nom = input("veuillez valider le nom saisi :")
+                validation_nom = input("Veuillez valider le nom saisi: ")
 
                 if nom == validation_nom:
                     return validation_nom.lower()
@@ -122,7 +123,7 @@ def get_email_validation(email):
 
 
 
-test = Email()
+"""test = Email()
 test.setUserName()
 test.setEmail()
-print(test.getEmail(), test.getUserName())
+print(test.getEmail(), test.getUserName())"""
