@@ -1,18 +1,16 @@
 class Permissions:
     def __init__(self):
-        self.__superAdmin = []
-        self.__admin = []
-        self.__member = []
-        self.__visitor = []
+        self.__superAdmin = [1,1,1,1]
+        self.__admin = [1,1,1,0]
+        self.__member = [1,1,0,0]
+        self.__visitor = [1,0,0,0]
 
-    def getPermsSuperAdmin(self):
-        return self.__superAdmin
-
-    def getPermsAdmin(self):
-        return self.__admin
-
-    def getPermsMember(self):
-        return self.__member
-
-    def getPermsVisitor(self):
-        return self.__visitor
+    def get_role (self, rang):
+        if rang == 3:
+            return self.__superAdmin
+        if rang == 2:
+            return self.__admin
+        if rang == 1:
+            return self.__member
+        if rang == 0:
+            return self.__visitor

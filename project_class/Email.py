@@ -2,7 +2,6 @@ from random import randint
 import smtplib
 import sys
 
-
 class Email:
     def __init__(self):
         self.__userName = ""

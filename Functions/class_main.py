@@ -1,7 +1,8 @@
 from Functions.gestion_files import *
+from project_class.User import *
 from project_class.Email import *
 from project_class.Password import *
-from project_class.User import *
+
 
 
 def inscription(chemin_main):
