@@ -1,7 +1,6 @@
 from random import randint
 import smtplib
 import sys
-import re
 
 
 class Email:
@@ -15,9 +14,7 @@ class Email:
     def setEmail(self):
         student_mail = str(self.__userName) + "@students.ephec.be"
         prof_mail = str(self.__userName) + "@ephec.be"
-        checkEmailValidation(student_mail, prof_mail)
-
-
+        self.__emailEphec = checkEmailValidation(student_mail, prof_mail)
 
     def setUserName(self):
         prenom = get_prenom()
@@ -127,25 +124,21 @@ def checkEmailValidation(student,prof):
                         sys.exit()
 
                     elif int(input_user) == code:
-                        return True
+                        return email
 
                     else:
                         pass
-            print("vous dépassés les tentatives autorisées...")
-            sys.exit(0)
+            print("Vous avez dépassé les tentatives autorisées...")
+            return False
 
         elif email == "exit":
             sys.exit()
 
         else:
-            print("veuillez saisir une adresse valide...")
+            print("Veuillez saisir une adresse valide...")
             out_while = -1
 
 
 
 
 
-
-test = Email()
-test.setUserName()
-test.setEmail()

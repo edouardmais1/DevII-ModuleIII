@@ -14,21 +14,6 @@ def write_file(chemin, folder, file, email, password):
     file.write(email + '  ' + password + '\n')
     file.close()
 
-
-def check_email_validation(email):  # tester la validité de l'adresse plus en profondeur
-    '''
-    ---> vérifier si l'email saisi par l'utilisateur est valide ou non (de type @mail).
-
-    :param email: --> email fourni par l'utilisateur.
-    :return: True si le type est correct et False dans le cas contraire.
-    '''
-    if "@ephec" not in email:
-        return False
-
-    else:
-        return True
-
-
 def check_email_exist(chemin, folder, file, email):
     '''
     ---> permet de vérifier si l'adresse email saisie est déja utilisée ou non.
@@ -41,28 +26,4 @@ def check_email_exist(chemin, folder, file, email):
     Pre :   file (le nom de fichier saisi) doit exister.
     Post : -
     '''
-    path = chemin + "\\" + folder + "\\" + file
-    emails_tab = []
-    tab = []
-    try:
-        with open(path, "r") as file:
-            for lines in file:
-                tab.append(lines.rstrip().split())
-
-            for elem in tab:
-                emails_tab.append(elem[0])
-
-
-    except FileNotFoundError:
-        print("fichier introuvable")
-
-    except IOError:
-        print("erreur lors de l'ouverture du fichier")
-
-    except IndexError:
-        pass
-
-    if email in emails_tab:
-        return True
-    else:
-        return False
+    pass
