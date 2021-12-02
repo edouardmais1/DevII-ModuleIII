@@ -24,12 +24,16 @@ def checkPassword():
     out_password = -1
     while out_password < 0:
         # pswd = getpass.getpass('Password (1 Maj., 1 chiffre, 1 caractère spécial, min. 9 caractères): ')
+
         pswd = input('Password (1 Maj., 1 chiffre, 1 caractère spécial, min. 9 caractères): ')
+
         if pswd == "exit":
             sys.exit(0)
+
         if re.search('[A-Z]', pswd) == None or re.search('[0-9]', pswd) == None or \
                 not set('[~!@#$%^&*()_+{}":;\']+$').intersection(pswd) or len(pswd) < 9:
             out_password = -1
+
         else:
             out_check_password = -1
             while out_check_password < 0:
@@ -39,4 +43,3 @@ def checkPassword():
                     sys.exit(0)
                 if check_pswd == pswd:
                     return pswd
-
