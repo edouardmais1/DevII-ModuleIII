@@ -1,6 +1,7 @@
 from random import randint
 import smtplib
 import sys
+import re
 
 
 class Email:
@@ -12,30 +13,10 @@ class Email:
         return self.__emailEphec
 
     def setEmail(self):
-        correct_mail = str(self.__userName) + "@students.ephec.be"
-        out_input = -1
-        while out_input < 0:
-            email = input("Veuillez saisir votre adresse mail ephec personnelle "
-                          "(InitialePrenom.Nom@students.ephec.be): ")
-            if email == correct_mail:
-                for j in range(2):
-                    code = get_email_validation(email)
+        student_mail = str(self.__userName) + "@students.ephec.be"
+        prof_mail = str(self.__userName) + "@ephec.be"
+        checkEmailValidation(student_mail, prof_mail)
 
-                    for i in range(2, 0, -1):
-                        input_user = input("Veuillez saisir le code reçu par mail(" + str(i)
-                                           + " tentatives restantes): ")
-                        if input_user == "exit":
-                            sys.exit()
-
-                        elif int(input_user) == code:
-                            print("ok merci !")
-                            return True
-                            #get_password()
-
-
-            else:
-                print("Email saisi non conforme aux données rentrées ...")
-                out_input = -1
 
 
     def setUserName(self):
@@ -45,8 +26,6 @@ class Email:
 
     def getUserName(self):
         return self.__userName
-
-
 
 
 #------------------Email Functions---------------------
@@ -61,6 +40,10 @@ def get_prenom():
         prenom = input("Veuillez rentrer votre prenom: ")
 
         if any(elem.isdigit() for elem in prenom):
+            print("Veuillez saisir un prénom valide ...")
+            out_input = -1
+
+        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(prenom):
             print("Veuillez saisir un prénom valide ...")
             out_input = -1
 
@@ -88,6 +71,10 @@ def get_nom():
 
         if any(elem.isdigit() for elem in nom):
             print("Veuillez saisir un nom valide ...")
+            out_input = -1
+
+        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(nom):
+            print("Veuillez saisir un prénom valide ...")
             out_input = -1
 
         else:
@@ -120,10 +107,45 @@ def get_email_validation(email):
         return validation_code
 
 
+def checkEmailValidation(student,prof):
+
+    out_while = -1
+
+    while out_while < 0:
+        email = input("veuillez saisir votre adresse ephec personnelle (élève : InitialePrenom.nom@students.ephec.be), (exit pour quitter) :")
+
+        if email == student or email == prof:
+
+            for i in range(2):
+                print("un code vous à été envoyé par mail")
+                code = get_email_validation(email)
+
+                for j in range(3):
+                    input_user = input("veuillez saisir le code recu par mail (4 chiffres), (exit pour quitter) :")
+
+                    if input_user == "exit":
+                        sys.exit()
+
+                    elif int(input_user) == code:
+                        return True
+
+                    else:
+                        pass
+            print("vous dépassés les tentatives autorisées...")
+            sys.exit(0)
+
+        elif email == "exit":
+            sys.exit()
+
+        else:
+            print("veuillez saisir une adresse valide...")
+            out_while = -1
 
 
 
-"""test = Email()
+
+
+
+test = Email()
 test.setUserName()
 test.setEmail()
-print(test.getEmail(), test.getUserName())"""
