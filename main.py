@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import kivy
 from Functions.class_main import *
 
 if __name__ == '__main__':
