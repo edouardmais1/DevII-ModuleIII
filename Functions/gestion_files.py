@@ -14,16 +14,16 @@ def write_file(chemin, folder, file, email, password):
     file.write(email + '  ' + password + '\n')
     file.close()
 
-def check_email_exist(chemin, folder, file, email):
-    '''
-    ---> permet de vérifier si l'adresse email saisie est déja utilisée ou non.
 
-    :param file: nom du fichier dans lequel se trouve les données
+def check_email_exist(email):
+    '''
+    ---> permet de vérifier si l'adresse email saisie est déja utilisée ou non dans la base de donnée.
+
     :param email: adresse saisie par l'utilisateur
 
     :return: True si l'adresse éxiste déja et False si l'adresse n'éxiste pas
 
-    Pre :   file (le nom de fichier saisi) doit exister.
+    Pre : -
     Post : -
     '''
     pass
