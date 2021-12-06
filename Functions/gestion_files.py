@@ -15,7 +15,7 @@ def write_file(chemin, folder, file, email, password):
     file.close()
 
 
-def check_email_exist(email):
+def check_email_exist(chemin, folder, file, email):
     '''
     ---> permet de vérifier si l'adresse email saisie est déja utilisée ou non dans la base de donnée.
 
