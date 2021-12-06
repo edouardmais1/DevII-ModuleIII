@@ -2,6 +2,7 @@ from random import randint
 import smtplib
 import sys
 
+
 class Email:
     def __init__(self):
         self.__userName = ""
@@ -24,7 +25,7 @@ class Email:
         return self.__userName
 
 
-#------------------Email Functions---------------------
+# ------------------Email Functions---------------------
 
 def get_prenom():
     """
@@ -87,13 +88,18 @@ def get_nom():
 
 
 def get_email_validation(email):
+    """
+    ---> fonction permettant d'envoyer un mail à l'utilisateur muni d'un code de vérification de l'email afin de
+         de vérifier l'identité de l'utilisateur.
+    """
     validation_code = randint(1000, 9999)
 
     sender_address = "noreply@revosta.com"
     receiver_address = email
     account_password = "xso4%J91"
     subject = "Email verification"
-    body = "Salut poto!\n\nEntre ce code pour verifier ton compte : {}!\nWith regards,\n\tDeveloper".format(validation_code)
+    body = "Salut poto!\n\nEntre ce code pour verifier ton compte : {}!\nWith regards,\n\tDeveloper".format(
+        validation_code)
 
     with smtplib.SMTP_SSL("smtp.revosta.com", 465) as smtp_server:
         smtp_server.login(sender_address, account_password)
@@ -103,12 +109,16 @@ def get_email_validation(email):
         return validation_code
 
 
-def checkEmailValidation(student,prof):
-
+def checkEmailValidation(student, prof):
+    """
+    --->fonction permettant de vérifier le code envoyer par mail
+    """
     out_while = -1
 
     while out_while < 0:
-        email = input("veuillez saisir votre adresse ephec personnelle (élève : InitialePrenom.nom@students.ephec.be), (exit pour quitter) :")
+        email = input(
+            "veuillez saisir votre adresse ephec personnelle (élève : InitialePrenom.nom@students.ephec.be),"
+            " (exit pour quitter) :")
 
         if email == student or email == prof:
 
@@ -136,8 +146,3 @@ def checkEmailValidation(student,prof):
         else:
             print("Veuillez saisir une adresse valide...")
             out_while = -1
-
-
-
-
-

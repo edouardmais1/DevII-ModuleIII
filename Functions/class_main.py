@@ -4,13 +4,10 @@ from project_class.Email import *
 from project_class.Password import *
 
 
-
 def inscription(chemin_main):
     '''
     ---> gère l'inscription de l'utilisateur
-    ---> appel fonction check_email_validation -> vérifier si le champ saisi est de type mail.
-    ---> appel fonction check_email_exist -> vérifier si l'email saisi éxiste ou non.
-    ---> appel fonction inscription_pswd -> créer un mdp pour l'utilisteur lors de son inscription.
+    ---> pour l'instant, les utilisateur sont stockés dans un fichier texte car MongoDB n'est pas implémenté
 
     Pre :   1) l'utilisateur doit respecter les conditions demandées lors de l'input.
             2) l'email saisi doit etre sous un format 'email'.
@@ -35,5 +32,5 @@ def inscription(chemin_main):
         print("Votre inscription a bien été enregistrée !\n")
 
 
-def connexion(chemin_main):
+def connexion():
     pass

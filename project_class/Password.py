@@ -16,10 +16,16 @@ class Password:
 
 
 def hashPassword(password):
+    """
+    ---> fonction permettant de hasher le mot de passe saisi par l'utilisateur pour augmenter la sécurité du système
+    """
     return hashlib.md5(password.encode()).hexdigest()
 
 
 def checkPassword():
+    """
+    ---> fonction permettant à l'utilisateur d'entrer un mot de passe et le valider
+    """
     # path = chemin_main
     out_password = -1
     while out_password < 0:
