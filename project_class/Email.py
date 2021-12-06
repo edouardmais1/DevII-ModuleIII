@@ -146,4 +146,3 @@ def checkEmailValidation(student, prof):
         else:
             print("Veuillez saisir une adresse valide...")
             out_while = -1
-"test"
