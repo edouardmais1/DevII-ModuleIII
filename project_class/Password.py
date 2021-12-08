@@ -26,7 +26,6 @@ def checkPassword():
     """
     ---> fonction permettant à l'utilisateur d'entrer un mot de passe et le valider
     """
-    # path = chemin_main
     out_password = -1
     while out_password < 0:
         # pswd = getpass.getpass('Password (1 Maj., 1 chiffre, 1 caractère spécial, min. 9 caractères): ')

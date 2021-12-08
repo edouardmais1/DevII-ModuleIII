@@ -9,14 +9,21 @@ class Email:
         self.__emailEphec = ""
 
     def getEmail(self):
+        """
+        ---> retourne le mail de l'utilisateur
+        """
         return self.__emailEphec
 
     def setEmail(self):
-        student_mail = str(self.__userName) + "@students.ephec.be"
-        prof_mail = str(self.__userName) + "@ephec.be"
-        self.__emailEphec = checkEmailValidation(student_mail, prof_mail)
+        """
+        ---> méthode permettant d'obtenir l'adresse mail de l'utilisateur
+        """
+        self.__emailEphec = checkEmailValidation()
 
     def setUserName(self):
+        """
+        ---> méthode permettant d'obtenir les coordonées de l'utlisateur (nom et prénom)
+        """
         prenom = get_prenom()
         nom = get_nom()
         self.__userName = prenom[0] + "." + nom
@@ -109,10 +116,12 @@ def get_email_validation(email):
         return validation_code
 
 
-def checkEmailValidation(student, prof):
+def checkEmailValidation():
     """
     --->fonction permettant de vérifier le code envoyer par mail
     """
+    email_prof = "@ephec.be"
+    email_students = "@students.ephec.be"
     out_while = -1
 
     while out_while < 0:
@@ -120,7 +129,7 @@ def checkEmailValidation(student, prof):
             "veuillez saisir votre adresse ephec personnelle (élève : InitialePrenom.nom@students.ephec.be),"
             " (exit pour quitter) :")
 
-        if email == student or email == prof:
+        if email_prof in email or email_students in email:
 
             for i in range(2):
                 print("un code vous à été envoyé par mail")
@@ -138,7 +147,7 @@ def checkEmailValidation(student, prof):
                     else:
                         pass
             print("Vous avez dépassé les tentatives autorisées...")
-            return False
+            sys.exit()
 
         elif email == "exit":
             sys.exit()
