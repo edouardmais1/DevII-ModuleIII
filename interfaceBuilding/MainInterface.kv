@@ -1,0 +1,30 @@
+<MyGridLayout>
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+
+        GridLayout:
+            cols:2
+
+            Label:
+                text: "email: "
+            TextInput:
+                id: "email"
+                multiline:False
+
+            Label:
+                text: "password: "
+            TextInput:
+                id: "password"
+                multiline:False
+
+
+        Button:
+            text: "LogIn"
+            font_size: 24
+            on_press: root.press_login()
+
+        Button:
+            text: "SignUp"
+            font_size: 24
+            on_press: root.press_signin()
