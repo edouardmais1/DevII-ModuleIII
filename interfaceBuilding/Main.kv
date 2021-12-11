@@ -22,12 +22,16 @@ WindowManager:
         spacing : 20
         padding : 20
 
+
+        Label:
+            text : "Login to EpheConv"
+            font_size : 30
+
         Label:
             text : "email"
             size_hint : (None, None)
             height : 50
             width : 200
-            pos_hint: {'center_x': .5, 'center_y': .5}
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
@@ -39,15 +43,11 @@ WindowManager:
         TextInput:
             multiline : False
 
-
-
-
         Label:
             text : "password"
             size_hint : (None, None)
             height : 50
             width : 200
-            pos_hint: {'center_x': .5, 'center_y': .5}
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
@@ -61,15 +61,40 @@ WindowManager:
 
 
         Button:
-            text: "Inscription"
-            font_size : 32
-            on_release:
-                app.root.current = "second"
-                root.manager.transition.direction = "up"
-                root.manager.transition.duration = 0.4
+            text: "Sign IN"
+            font_size : 25
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            canvas:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
+        BoxLayout:
+            orientation : "horizontal"
+            spacing: 20
+
+            Label:
+                text : "New to EpheConv ?"
+                font_size: 25
+
+            Button:
+                text: "Create an account"
+                font_size : 25
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    app.root.current = "second"
+                    root.manager.transition.direction = "up"
+                    root.manager.transition.duration = 0.4
+
 
 
 <InscriptionScreen>:
+    prenom_input : prenom
     name : "second"
     canvas.before:
         Color:
@@ -87,11 +112,29 @@ WindowManager:
         padding : 20
 
         Label:
-            text : "email"
+            text : "Prenom"
             size_hint : (None, None)
             height : 50
             width : 200
-            pos_hint: {'center_x': .5, 'center_y': .5}
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        TextInput:
+            id: prenom
+            multiline : False
+            on_text_validate: root.validPrenom(self, self.text)
+            on_text: self.foreground_color = (1,0,0,1)
+
+        Label:
+            text : "Nom"
+            size_hint : (None, None)
+            height : 50
+            width : 200
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
@@ -103,15 +146,27 @@ WindowManager:
         TextInput:
             multiline : False
 
+        Label:
+            text : "email"
+            size_hint : (None, None)
+            height : 50
+            width : 200
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
 
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
+        TextInput:
+            multiline : False
 
         Label:
             text : "password"
             size_hint : (None, None)
             height : 50
             width : 200
-            pos_hint: {'center_x': .5, 'center_y': .5}
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
@@ -123,19 +178,22 @@ WindowManager:
         TextInput:
             multiline : False
 
+        BoxLayout:
+            orientation : "horizontal"
+            spacing : 30
 
-        Button:
-            text: "Submit"
-            font_size : 32
-            on_release:
+            Button:
+                text: "Submit"
+                font_size : 32
+                on_release:
 
-        Button:
-            text: "Go Back"
-            font_size : 32
-            on_release:
-                app.root.current = "first"
-                root.manager.transition.direction = "down"
-                root.manager.transition.duration = 0.4
+            Button:
+                text: "Go Back"
+                font_size : 32
+                on_release:
+                    app.root.current = "first"
+                    root.manager.transition.direction = "down"
+                    root.manager.transition.duration = 0.4
 
 
 
