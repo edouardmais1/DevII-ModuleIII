@@ -38,8 +38,18 @@ class InscriptionScreen(Screen):
         else:
             instance.foreground_color = (0, 255, 0, 1)
 
-    def getNom(self):
-        pass
+    def validNom(self, instance, value):
+        """
+        ---> permet de vérifier la validité du nom
+        """
+        if any(elem.isdigit() for elem in value):
+            instance.foreground_color = (1, 0, 0, 1)
+
+        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(value):
+            instance.foreground_color = (1, 0, 0, 1)
+
+        else:
+            instance.foreground_color = (0, 255, 0, 1)
 
     def getEmail(self):
         pass

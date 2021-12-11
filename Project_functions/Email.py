@@ -20,12 +20,10 @@ class Email:
         """
         self.__emailEphec = checkEmailValidation()
 
-    def setUserName(self):
+    def setUserName(self, nom, prenom):
         """
         ---> méthode permettant d'obtenir les coordonées de l'utlisateur (nom et prénom)
         """
-        prenom = get_prenom()
-        nom = get_nom()
         self.__userName = prenom[0] + "." + nom
 
     def getUserName(self):
@@ -33,65 +31,6 @@ class Email:
 
 
 # ------------------Email Functions---------------------
-
-def get_prenom():
-    """
-    ---> fonction permettant d'obtenir le prénom du nouvel utilisateur
-    """
-    out_input = -1
-
-    while out_input < 0:
-        prenom = input("Veuillez rentrer votre prenom: ")
-
-        if any(elem.isdigit() for elem in prenom):
-            print("Veuillez saisir un prénom valide ...")
-            out_input = -1
-
-        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(prenom):
-            print("Veuillez saisir un prénom valide ...")
-            out_input = -1
-
-        else:
-            out_validation = -1
-            while out_validation < 0:
-                validation_prenom = input("Veuillez valider le prénom saisi: ")
-
-                if prenom == validation_prenom:
-                    return validation_prenom.lower()
-
-                else:
-                    print("Veuillez réessayer ...")
-                    out_validation = -1
-
-
-def get_nom():
-    """
-    ---> fonction permettant d'obtenir le nom du nouvel utilisateur
-    """
-    out_input = -1
-
-    while out_input < 0:
-        nom = input("Veuillez rentrer votre nom: ")
-
-        if any(elem.isdigit() for elem in nom):
-            print("Veuillez saisir un nom valide ...")
-            out_input = -1
-
-        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(nom):
-            print("Veuillez saisir un prénom valide ...")
-            out_input = -1
-
-        else:
-            out_validation = -1
-            while out_validation < 0:
-                validation_nom = input("Veuillez valider le nom saisi: ")
-
-                if nom == validation_nom:
-                    return validation_nom.lower()
-
-                else:
-                    print("veuillez réessayer...")
-                    out_validation = -1
 
 
 def get_email_validation(email):

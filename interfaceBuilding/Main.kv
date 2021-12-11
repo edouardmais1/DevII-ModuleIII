@@ -95,6 +95,7 @@ WindowManager:
 
 <InscriptionScreen>:
     prenom_input : prenom
+    nom_input: nom
     name : "second"
     canvas.before:
         Color:
@@ -114,7 +115,7 @@ WindowManager:
         Label:
             text : "Prenom"
             size_hint : (None, None)
-            height : 50
+            height : 35
             width : 200
             canvas.before:
                 Color:
@@ -133,7 +134,26 @@ WindowManager:
         Label:
             text : "Nom"
             size_hint : (None, None)
-            height : 50
+            height : 35
+            width : 200
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        TextInput:
+            id: nom
+            multiline : False
+            on_text_validate: root.validNom(self, self.text)
+            on_text: self.foreground_color = (1,0,0,1)
+
+        Label:
+            text : "email"
+            size_hint : (None, None)
+            height : 35
             width : 200
             canvas.before:
                 Color:
@@ -147,9 +167,9 @@ WindowManager:
             multiline : False
 
         Label:
-            text : "email"
+            text : "code de validation"
             size_hint : (None, None)
-            height : 50
+            height : 35
             width : 200
             canvas.before:
                 Color:
@@ -165,7 +185,7 @@ WindowManager:
         Label:
             text : "password"
             size_hint : (None, None)
-            height : 50
+            height : 35
             width : 200
             canvas.before:
                 Color:
@@ -184,12 +204,12 @@ WindowManager:
 
             Button:
                 text: "Submit"
-                font_size : 32
+                font_size : 25
                 on_release:
 
             Button:
                 text: "Go Back"
-                font_size : 32
+                font_size : 25
                 on_release:
                     app.root.current = "first"
                     root.manager.transition.direction = "down"
