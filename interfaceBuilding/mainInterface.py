@@ -37,16 +37,16 @@ class MyGridLayout(GridLayout):
         self.add_widget(self.top_grid)
 
         # create a submit button
-        self.login = Button(text="LOG IN", font_size=32)
-
-        # create a submit button
-        self.signin = Button(text="SIGN IN", font_size=32)
+        self.login = Button(text="Submit",
+                            font_size=32,
+                            size_hint_y=None,
+                            height=50,
+                            size_hint_x=None,
+                            width=200)
 
         # bind the button
         self.login.bind(on_press=self.press_login)
         self.add_widget(self.login)
-        self.signin.bind(on_press=self.press_signin)
-        self.add_widget(self.signin)
 
     def press_login(self, elem):
         name = self.name.text
@@ -57,8 +57,6 @@ class MyGridLayout(GridLayout):
         self.name.text = ""
         self.pswd.text = ""
 
-    def press_signin(self, elem):
-        print("JEN AI MARRE ...")
 
 class MainInterface(App):
     def build(self):
