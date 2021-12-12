@@ -1,6 +1,5 @@
 from random import randint
 import smtplib
-import sys
 
 
 class Email:
@@ -55,42 +54,23 @@ def get_email_validation(email):
         return validation_code
 
 
-def checkEmailValidation():
+def checkEmailValidation(prenom, mail):
     """
-    --->fonction permettant de vérifier le code envoyer par mail
+    --->fonction permettant de vérifier le format de l'adresse mail saisie par l'utilisateur
     """
     email_prof = "@ephec.be"
     email_students = "@students.ephec.be"
-    out_while = -1
 
-    while out_while < 0:
-        email = input(
-            "veuillez saisir votre adresse ephec personnelle (élève : InitialePrenom.nom@students.ephec.be),"
-            " (exit pour quitter) :")
-
-        if email_prof in email or email_students in email:
-
-            for i in range(2):
-                print("un code vous à été envoyé par mail")
-                code = get_email_validation(email)
-
-                for j in range(3):
-                    input_user = input("veuillez saisir le code recu par mail (4 chiffres), (exit pour quitter) :")
-
-                    if input_user == "exit":
-                        sys.exit()
-
-                    elif int(input_user) == code:
-                        return email
-
-                    else:
-                        pass
-            print("Vous avez dépassé les tentatives autorisées...")
-            sys.exit()
-
-        elif email == "exit":
-            sys.exit()
+    if prenom[0] in mail:
+        if email_prof in mail or email_students in mail:
+            return True
 
         else:
-            print("Veuillez saisir une adresse valide...")
-            out_while = -1
+            return False
+
+    else:
+        return False
+
+
+
+

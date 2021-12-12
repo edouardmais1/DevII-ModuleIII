@@ -96,6 +96,13 @@ WindowManager:
 <InscriptionScreen>:
     prenom_input : prenom
     nom_input: nom
+    email_input: email
+    code_input : code
+    code_validation_message : msg
+    check_code : check_code
+    password_input : password
+    check_password : check_password
+
     name : "second"
     canvas.before:
         Color:
@@ -164,7 +171,20 @@ WindowManager:
                     size: self.size
 
         TextInput:
+            id: email
             multiline : False
+            on_text_validate: root.getEmail(self, self.text)
+            on_text: self.foreground_color = (1,0,0,1)
+
+        Label:
+            id: msg
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
         Label:
             text : "code de validation"
@@ -180,13 +200,55 @@ WindowManager:
                     size: self.size
 
         TextInput:
+            id : code
             multiline : False
+            on_text_validate: root.checkCode(self, self.text)
+            on_text: self.foreground_color = (1,0,0,1)
 
         Label:
-            text : "password"
-            size_hint : (None, None)
-            height : 35
-            width : 200
+            id : check_code
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing : 30
+
+            Label:
+                text : "password"
+                canvas.before:
+                    Color:
+                        rgba : (148, 204, 0, 0.5)
+
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            TextInput:
+                id : password
+                multiline : False
+                on_text_validate: root.getPassword(self, self.text)
+                on_text: self.foreground_color = (1,0,0,1)
+
+            Label:
+                text : "veuillez saisir un mot de passe robuste"
+                id : check_password
+                canvas.before:
+                    Color:
+                        rgba : (148, 204, 0, 0.5)
+
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+
+        Label:
+            text : "check password"
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
@@ -196,7 +258,15 @@ WindowManager:
                     size: self.size
 
         TextInput:
-            multiline : False
+
+        Label:
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
 
         BoxLayout:
             orientation : "horizontal"
