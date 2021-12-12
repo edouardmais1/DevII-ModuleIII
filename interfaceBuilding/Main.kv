@@ -215,40 +215,12 @@ WindowManager:
                     pos: self.pos
                     size: self.size
 
-        BoxLayout:
-            orientation: 'horizontal'
-            spacing : 30
-
-            Label:
-                text : "password"
-                canvas.before:
-                    Color:
-                        rgba : (148, 204, 0, 0.5)
-
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-
-            TextInput:
-                id : password
-                multiline : False
-                on_text_validate: root.getPassword(self, self.text)
-                on_text: self.foreground_color = (1,0,0,1)
-
-            Label:
-                text : "veuillez saisir un mot de passe robuste"
-                id : check_password
-                canvas.before:
-                    Color:
-                        rgba : (148, 204, 0, 0.5)
-
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-
 
         Label:
-            text : "check password"
+            text : "password"
+            size_hint : (None, None)
+            height : 35
+            width : 200
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
@@ -258,8 +230,14 @@ WindowManager:
                     size: self.size
 
         TextInput:
+            id : password
+            multiline : False
+            on_text_validate: root.getPassword(self, self.text)
+            on_text: self.foreground_color = (1,0,0,1)
 
         Label:
+            text : "veuillez saisir un mot de passe robuste"
+            id : check_password
             canvas.before:
                 Color:
                     rgba : (148, 204, 0, 0.5)
