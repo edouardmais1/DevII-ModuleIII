@@ -47,7 +47,7 @@ class InscriptionScreen(Screen):
 
     def validPrenom(self, instance, value):
         """
-        ---> permet de vérifier la validité du prénom
+        ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom
         """
         if any(elem.isdigit() for elem in value):
             instance.foreground_color = (1, 0, 0, 1)
@@ -60,7 +60,7 @@ class InscriptionScreen(Screen):
 
     def validNom(self, instance, value):
         """
-        ---> permet de vérifier la validité du nom
+        ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom
         """
         if any(elem.isdigit() for elem in value):
             instance.foreground_color = (1, 0, 0, 1)
@@ -124,7 +124,7 @@ class InscriptionScreen(Screen):
 
 
 class WindowManager(ScreenManager):
-    Window.size = (1200, 900)
+    Window.size = (1000, 700)
 
 
 kv = Builder.load_file('Main.kv')
