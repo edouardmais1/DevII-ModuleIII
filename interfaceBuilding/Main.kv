@@ -111,144 +111,128 @@ WindowManager:
             pos: self.pos
             size: self.size
 
-
     BoxLayout:
-        orientation : 'vertical'
-        size : root.width, root.height
+        orientation: 'vertical'
 
-        spacing : 20
-        padding : 20
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
 
-        Label:
-            text : "Prenom"
-            size_hint : (None, None)
-            height : 35
-            width : 200
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+                Label:
+                    text : "Prenom"
+                    font_size: 25
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+                TextInput:
+                    id: prenom
+                    on_text_validate: root.validPrenom(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
 
-        TextInput:
-            id: prenom
-            multiline : False
-            on_text_validate: root.validPrenom(self, self.text)
-            on_text: self.foreground_color = (1,0,0,1)
+                Label:
 
-        Label:
-            text : "Nom"
-            size_hint : (None, None)
-            height : 35
-            width : 200
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+                Label:
+                    text : "Nom"
+                    font_size: 25
 
-        TextInput:
-            id: nom
-            multiline : False
-            on_text_validate: root.validNom(self, self.text)
-            on_text: self.foreground_color = (1,0,0,1)
+                TextInput:
+                    id: nom
+                    on_text_validate: root.validNom(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
 
-        Label:
-            text : "email"
-            size_hint : (None, None)
-            height : 35
-            width : 200
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+                Label:
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
 
-        TextInput:
-            id: email
-            multiline : False
-            on_text_validate: root.getEmail(self, self.text)
-            on_text: self.foreground_color = (1,0,0,1)
+                Label:
+                    text : "Email"
+                    font_size: 25
 
-        Label:
-            id: msg
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+                TextInput:
+                    id: email
+                    on_text_validate: root.getEmail(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+                Label:
+                    id: msg
+                    text: 'test'
 
-        Label:
-            text : "code de validation"
-            size_hint : (None, None)
-            height : 35
-            width : 200
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+                Label:
+                    text : "Code Validation"
+                    font_size: 25
 
-        TextInput:
-            id : code
-            multiline : False
-            on_text_validate: root.checkCode(self, self.text)
-            on_text: self.foreground_color = (1,0,0,1)
+                TextInput:
+                    id: code
+                    on_text_validate: root.checkCode(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
 
-        Label:
-            id : check_code
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
-
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+                Label:
+                    id: check_code
+                    text: "test"
 
 
-        Label:
-            text : "password"
-            size_hint : (None, None)
-            height : 35
-            width : 200
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+                Label:
+                    text : "Password"
+                    font_size: 25
 
-        TextInput:
-            id : password
-            multiline : False
-            on_text_validate: root.getPassword(self, self.text)
-            on_text: self.foreground_color = (1,0,0,1)
+                TextInput:
+                    id: password
+                    on_text_validate: root.getPassword(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
 
-        Label:
-            text : "veuillez saisir un mot de passe robuste"
-            id : check_password
-            canvas.before:
-                Color:
-                    rgba : (148, 204, 0, 0.5)
+                Label:
+                    text: "veuillez saisir un mot de passe robuste"
+                    id: check_password
 
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "checkPassword"
+
+                TextInput:
+                    multiline : False
+
+                Label:
+                    text: "test"
+
 
         BoxLayout:
             orientation : "horizontal"
-            spacing : 30
+            spacing : 20
+            padding: 20
+            size_hint_y : None
+            height: 100
 
             Button:
                 text: "Submit"
@@ -257,11 +241,8 @@ WindowManager:
 
             Button:
                 text: "Go Back"
-                font_size : 25
+                font_hint: None, None
                 on_release:
                     app.root.current = "first"
                     root.manager.transition.direction = "down"
                     root.manager.transition.duration = 0.4
-
-
-
