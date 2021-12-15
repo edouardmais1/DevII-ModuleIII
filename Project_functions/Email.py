@@ -2,33 +2,6 @@ from random import randint
 import smtplib
 
 
-class Email:
-    def __init__(self):
-        self.__userName = ""
-        self.__emailEphec = ""
-
-    def getEmail(self):
-        """
-        ---> retourne le mail de l'utilisateur
-        """
-        return self.__emailEphec
-
-    def setEmail(self):
-        """
-        ---> méthode permettant d'obtenir l'adresse mail de l'utilisateur
-        """
-        self.__emailEphec = checkEmailValidation()
-
-    def setUserName(self, nom, prenom):
-        """
-        ---> méthode permettant d'obtenir les coordonées de l'utlisateur (nom et prénom)
-        """
-        self.__userName = prenom[0] + "." + nom
-
-    def getUserName(self):
-        return self.__userName
-
-
 # ------------------Email Functions---------------------
 
 

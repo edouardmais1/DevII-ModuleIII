@@ -3,9 +3,18 @@
 WindowManager:
     ConnexionScreen:
     InscriptionScreen:
+    programWindow:
+
+
+<programWindow>:
+    name: "programWindow"
+    Label:
+        text: "Welcome to the App"
 
 
 <ConnexionScreen>:
+    email_input : email
+    password_input : password
     name : "first"
     canvas.before:
         Color:
@@ -41,6 +50,7 @@ WindowManager:
                     size: self.size
 
         TextInput:
+            id : email
             multiline : False
 
         Label:
@@ -57,13 +67,15 @@ WindowManager:
                     size: self.size
 
         TextInput:
+            id : password
             multiline : False
-
 
         Button:
             text: "Sign IN"
             font_size : 25
             pos_hint: {'center_x': .5, 'center_y': .5}
+            on_release: root.connexionButton()
+
 
             canvas:
                 Color:
@@ -286,7 +298,7 @@ WindowManager:
             Button:
                 text: "Submit"
                 font_size : 25
-                on_release:
+                on_release: root.Submit()
 
             Button:
                 text: "Go Back"

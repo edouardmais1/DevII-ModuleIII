@@ -10,6 +10,7 @@ from kivy.core.window import Window
 
 from Project_functions.Email import *
 from Project_functions.Password import *
+from mongo.mongoConnector import *
 
 
 # Connexion and Inscription screen creation
@@ -17,7 +18,20 @@ class ConnexionScreen(Screen):
     """
     ---> assure la gestion des inscriptions au sein de l'application
     """
-    pass
+    email_input = ObjectProperty
+    password_input = ObjectProperty
+
+    def connexionButton(self):
+        mail = self.email_input.text
+        hash_pswd = hashPassword(self.password_input.text)
+        if connexion(mail=mail, password=hash_pswd):
+            wm = App.get_running_app().root
+            print("CONNECTE")
+            wm.current = 'programWindow'
+
+        else:
+            print("ERROR 404")
+            return False
 
 
 class InscriptionScreen(Screen):
@@ -182,7 +196,15 @@ class InscriptionScreen(Screen):
             self.check_password_message.text = "veuillez saisir le meme mot de passe que celui choisi"
 
     def Submit(self):
-        pass
+        if self.submit_code and self.submit_mail and self.submit_password:
+            mail = self.email_input.text
+            hash_pswd = hashPassword(self.password_input.text)
+            submit_data_DB(mail=mail, password=hash_pswd)
+        else:
+            pass
+
+class programWindow(Screen):
+    pass
 
 
 class WindowManager(ScreenManager):

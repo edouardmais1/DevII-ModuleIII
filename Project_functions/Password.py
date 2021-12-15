@@ -2,15 +2,7 @@ import re
 import hashlib
 
 
-class Password:
-    def __init__(self):
-        self.__password = ""
-
-    def getPassword(self):
-        return self.__password
-
-    def setPassword(self):
-        self.__password = hashPassword(checkPassword())
+# ------------------Password Functions---------------------
 
 
 def hashPassword(password):

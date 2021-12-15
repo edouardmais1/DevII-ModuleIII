@@ -10,7 +10,7 @@ class MongoConnector:
     """
 
     def __init__(self):
-        certificat_path = r"C:\Users\YiddishGun\Desktop\DEV2\certifMongoDB\2TL2-G1.pem"
+        certificat_path = r"C:\Users\maxim\Documents\Maxime\EPHEC\BAC_2\2TL2-G1.pem"
         uri = "mongodb+srv://cluster0.5i6qo.gcp.mongodb.net/ephecom-2TL2?authSource=%24external&authMechanism=MONGODB" \
               "-X509&retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE "
         client = MongoClient(uri,
@@ -39,15 +39,31 @@ def submit_data_DB(mail, password):
     try:
         with MongoConnector() as connector:
             collection = connector.db["users"]
-            collection.insert_one("{mail : {}, password : {}}").format(mail, password)
+            collection.insert_one({"mail": mail, "password": password})
 
     except Exception as e:
         print(e)
 
 
 def connexion(mail, password):
-    pass
+    exist = []
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["users"]
+            myDoc = collection.find_one({"mail": mail, "password": password})
+            for user in myDoc:
+                exist.append(user)
+
+    except Exception as e:
+        print(e)
+    finally:
+        if len(exist) == 0:
+            return False
+        else:
+            return True
 
 
 if __name__ == '__main__':
-    testConnectionDB()
+    # submit_data_DB("max", "test")
+    print(connexion('m.momin@students.ephec.be', 'a0bf0f085c73745d1064b84a5a4df6c4'))
+
