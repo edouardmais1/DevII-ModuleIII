@@ -184,7 +184,7 @@ class InscriptionScreen(Screen):
             self.password = value
 
         else:
-            self.check_password.text = "password pas assez robuste, réessayez..."
+            self.password_input_message.text = "password pas assez robuste, réessayez..."
 
     def checkPassword(self, instance, value):
         if value == self.password:
@@ -200,6 +200,8 @@ class InscriptionScreen(Screen):
             mail = self.email_input.text
             hash_pswd = hashPassword(self.password_input.text)
             submit_data_DB(mail=mail, password=hash_pswd)
+            wm = App.get_running_app().root
+            wm.current = 'programWindow'
         else:
             pass
 

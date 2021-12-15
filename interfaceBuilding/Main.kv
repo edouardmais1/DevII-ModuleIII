@@ -69,6 +69,7 @@ WindowManager:
         TextInput:
             id : password
             multiline : False
+            password: True
 
         Button:
             text: "Sign IN"
@@ -253,6 +254,7 @@ WindowManager:
 
                 TextInput:
                     id: password
+                    password: True
                     on_text_validate: root.getPassword(self, self.text)
                     on_text: self.foreground_color=(1,0,0,1)
                     multiline: False
@@ -278,6 +280,7 @@ WindowManager:
                             size: self.size
 
                 TextInput:
+                    password: True
                     id: check_password_validation
                     on_text: self.foreground_color = (1,0,0,1)
                     on_text_validate: root.checkPassword(self, self.text)
