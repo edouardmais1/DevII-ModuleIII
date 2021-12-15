@@ -22,13 +22,16 @@ class ConnexionScreen(Screen):
 
 class InscriptionScreen(Screen):
     """
-    ---> assure la gestion des inscriptions au sein de l'application
+    ---> assure la gestion des inscriptions au sein de l'application à travers différentes méthodes.
+
     """
+    # les 6 champs principaux lors de l'inscription de l'utilisateur
     prenom_input = ObjectProperty
     nom_input = ObjectProperty
     email_input = ObjectProperty
     code_input = ObjectProperty
     password_input = ObjectProperty
+    check_password_input = ObjectProperty
 
     # message d'envoi de code de validation
     code_validation_message = ObjectProperty
@@ -37,10 +40,24 @@ class InscriptionScreen(Screen):
     check_code = ObjectProperty
 
     # message d'information lors de la saisie du mot de passe
-    check_password = ObjectProperty
+    password_input_message = ObjectProperty
+
+    # message d'information lors de la validation du mot de passe
+    check_password_message = ObjectProperty
 
     # variable contenant le code de validation de mail
     code_mail = ""
+
+    # variable contenant le mot de passe une fois celui ci initilaisé
+    password = ""
+
+    # variable contenant le prénom de l'utilisateur
+    prenom = ""
+
+    # préconditions du submit
+    submit_code = False
+    submit_password = False
+    submit_mail = False
 
     def __init__(self, **kwargs):
         super(InscriptionScreen, self).__init__(**kwargs)
@@ -48,24 +65,45 @@ class InscriptionScreen(Screen):
     def validPrenom(self, instance, value):
         """
         ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom
+
+             Pre: -
+
+             Post: valide la saisie de l'utilisateur
         """
         if any(elem.isdigit() for elem in value):
             instance.foreground_color = (1, 0, 0, 1)
 
         elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(value):
+            instance.foreground_color = (1, 0, 0, 1)
+
+        elif len(value) <= 3:
+            instance.foreground_color = (1, 0, 0, 1)
+
+        elif len(value) >= 20:
             instance.foreground_color = (1, 0, 0, 1)
 
         else:
             instance.foreground_color = (0, 255, 0, 1)
+            self.prenom = value
 
     def validNom(self, instance, value):
         """
         ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom
+
+             Pre: -
+
+             Post: valide la saisie de l'utilisateur
         """
         if any(elem.isdigit() for elem in value):
             instance.foreground_color = (1, 0, 0, 1)
 
         elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(value):
+            instance.foreground_color = (1, 0, 0, 1)
+
+        elif len(value) <= 3:
+            instance.foreground_color = (1, 0, 0, 1)
+
+        elif len(value) >= 20:
             instance.foreground_color = (1, 0, 0, 1)
 
         else:
@@ -75,24 +113,37 @@ class InscriptionScreen(Screen):
         """
         ---> permet d'envoyer un code de validation à l'utilisateur apres une série de procédés
              visants à valider le format de l'adresse mail de l'utilisateur saisie
+
+             Pre: l'utilisateur doit au préalable avoir saisi un prénom et nom valide
+
+             Post: renvoi un mail à l'adresse mail saisie avec un code de validation
+
+             Raise: IndexError si l'utilisateur valide un champ d'input vide
         """
-        prenom = self.prenom_input.text
+        prenom = self.prenom
 
-        # check if the email format is ok
-        if checkEmailValidation(prenom, value):
-            instance.foreground_color = (0, 255, 0, 1)
+        try:
+            # check if the email format is ok
+            if checkEmailValidation(prenom, value):
+                instance.foreground_color = (0, 255, 0, 1)
 
-            # envoi d'un code de validation à l'utilisateur
-            self.code_mail = get_email_validation(value)
-            self.code_validation_message.text = "un code de validation vous a été envoyé"
+                # envoi d'un code de validation à l'utilisateur
+                self.code_mail = get_email_validation(value)
+                self.code_validation_message.text = "un code de validation vous a été envoyé"
 
-        # laisse la saisie de l'utilisateur en rouge
-        else:
-            instance.foreground_color = (1, 0, 0, 1)
+            else:
+                instance.foreground_color = (1, 0, 0, 1)
+
+        except IndexError:
+            self.code_validation_message.text = "veuillez au préalable avoir rempli votre prenom et nom"
 
     def checkCode(self, instance, value):
         """
         ---> permet de vérifier l'authenticité du code envoyé par mail à l'utilisateur
+
+             Pre: -
+
+             Post: valide la saisie du code de validation
         """
 
         # la valeur du code envoyé précédement par mail lors de la validation de l'email
@@ -102,24 +153,35 @@ class InscriptionScreen(Screen):
         if int(value) == code:
             instance.foreground_color = (0, 255, 0, 1)
             self.check_code.text = "code validé"
+            self.submit_code = True
+            self.submit_mail = True
 
         else:
             self.check_code.text = "veuillez réessayer..."
 
-    def getPassword(self,instance, value):
+    def getPassword(self, instance, value):
         """
         ---> permet la création d'un mot de passe pour le compte du nouvel utilisateur.
         """
-        self.check_password.text = "veuillez saisir un mdp avec au moins : "
+        self.password_input_message.text = "veuillez saisir un mdp avec au moins : "
         if checkPassword(value):
             instance.foreground_color = (0, 255, 0, 1)
-            self.check_password.text = "password assez robuste"
+            self.password_input_message.text = "password assez robuste"
+            self.password = value
 
         else:
             self.check_password.text = "password pas assez robuste, réessayez..."
 
-
     def checkPassword(self, instance, value):
+        if value == self.password:
+            instance.foreground_color = (0, 255, 0, 1)
+            self.check_password_message.text = "mot de passe confirmé"
+            self.submit_password = True
+
+        else:
+            self.check_password_message.text = "veuillez saisir le meme mot de passe que celui choisi"
+
+    def Submit(self):
         pass
 
 

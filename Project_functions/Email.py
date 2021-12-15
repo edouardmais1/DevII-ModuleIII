@@ -61,7 +61,7 @@ def checkEmailValidation(prenom, mail):
     email_prof = "@ephec.be"
     email_students = "@students.ephec.be"
 
-    if prenom[0] in mail:
+    if prenom[0] == mail[0]:
         if email_prof in mail or email_students in mail:
             return True
 

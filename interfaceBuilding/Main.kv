@@ -101,7 +101,9 @@ WindowManager:
     code_validation_message : msg
     check_code : check_code
     password_input : password
-    check_password : check_password
+    password_input_message : password_message
+    check_password_input : check_password_validation
+    check_password_message: check_password_message
 
     name : "second"
     canvas.before:
@@ -124,6 +126,13 @@ WindowManager:
                 Label:
                     text : "Prenom"
                     font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 TextInput:
                     id: prenom
@@ -141,6 +150,13 @@ WindowManager:
                 Label:
                     text : "Nom"
                     font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 TextInput:
                     id: nom
@@ -160,6 +176,13 @@ WindowManager:
                 Label:
                     text : "Email"
                     font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 TextInput:
                     id: email
@@ -169,7 +192,7 @@ WindowManager:
 
                 Label:
                     id: msg
-                    text: 'test'
+                    text: 'veuillez saisir votre adresse mail ephec'
 
             BoxLayout:
                 orientation : "vertical"
@@ -179,6 +202,13 @@ WindowManager:
                 Label:
                     text : "Code Validation"
                     font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 TextInput:
                     id: code
@@ -188,7 +218,7 @@ WindowManager:
 
                 Label:
                     id: check_code
-                    text: "test"
+                    text: ""
 
 
         BoxLayout:
@@ -201,6 +231,13 @@ WindowManager:
                 Label:
                     text : "Password"
                     font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 TextInput:
                     id: password
@@ -210,7 +247,7 @@ WindowManager:
 
                 Label:
                     text: "veuillez saisir un mot de passe robuste"
-                    id: check_password
+                    id: password_message
 
             BoxLayout:
                 orientation : "vertical"
@@ -218,13 +255,25 @@ WindowManager:
                 padding: 20
 
                 Label:
-                    text : "checkPassword"
+                    text : "CheckPassword"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 TextInput:
+                    id: check_password_validation
+                    on_text: self.foreground_color = (1,0,0,1)
+                    on_text_validate: root.checkPassword(self, self.text)
                     multiline : False
 
                 Label:
-                    text: "test"
+                    id: check_password_message
+                    text: "veuillez valider le mot de passe saisi"
 
 
         BoxLayout:
