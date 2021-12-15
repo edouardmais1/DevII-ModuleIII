@@ -6,13 +6,7 @@ class MongoConnector:
         Cette classe permet de créer une connexion vers la base de données.
         Veuillez modifier la variable 'certificat_path' avec le chemin vers l'endroit ou se trouve votre certificat.
         Exemple d'utilisation dans votre code :
-        try:
-            with MongoConnector() as connector:
-                collection = connector.db["users"]
-                res = collection.find_one()
-                print(res)
-        except Exception as e:
-            print(e)
+
     """
 
     def __init__(self):
@@ -31,7 +25,7 @@ class MongoConnector:
         self.db.close()
 
 
-if __name__ == '__main__':
+def testConnectionDB():
     try:
         with MongoConnector() as connector:
             collection = connector.db["users"]
@@ -39,3 +33,21 @@ if __name__ == '__main__':
             print(res)
     except Exception as e:
         print(e)
+
+
+def submit_data_DB(mail, password):
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["users"]
+            collection.insert_one("{mail : {}, password : {}}").format(mail, password)
+
+    except Exception as e:
+        print(e)
+
+
+def connexion(mail, password):
+    pass
+
+
+if __name__ == '__main__':
+    testConnectionDB()
