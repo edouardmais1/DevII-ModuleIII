@@ -8,6 +8,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 
+
 from Project_functions.Email import *
 from Project_functions.Password import *
 from mongo.mongoConnector import *
@@ -80,6 +81,9 @@ class InscriptionScreen(Screen):
     submit_password = False
     submit_mail = False
 
+    # variable tentative code validation
+    count = 0
+
     def __init__(self, **kwargs):
         super(InscriptionScreen, self).__init__(**kwargs)
 
@@ -141,17 +145,24 @@ class InscriptionScreen(Screen):
 
              Raise: IndexError si l'utilisateur valide un champ mail et que les champs prenom et noms sont vides.
         """
-        prenom = self.prenom
+        prenom = self.prenom.lower()
 
         try:
             # check if the email format is ok
             if checkEmailValidation(prenom, value):
-                instance.foreground_color = (0, 255, 0, 1)
+                if not checkAccount(self.email_input.text):
+                    instance.foreground_color = (0, 255, 0, 1)
 
-                # envoi d'un code de validation à l'utilisateur
-                self.code_mail = get_email_validation(value)
-                self.code_validation_message.text = "un code de validation vous a été envoyé"
-
+                    # envoi d'un code de validation à l'utilisateur
+                    self.code_mail = get_email_validation(value)
+                    self.code_input.disabled = False
+                    self.code_validation_message.text = "un code de validation vous a été envoyé"
+                    self.email_input.disabled = True
+                    self.prenom_input.disabled = True
+                    self.nom_input.disabled = True
+                else:
+                    instance.foreground_color = (1, 0, 0, 1)
+                    self.code_validation_message.text = "Adresse déja utilisée..."
             else:
                 instance.foreground_color = (1, 0, 0, 1)
 
@@ -169,16 +180,25 @@ class InscriptionScreen(Screen):
 
         # la valeur du code envoyé précédement par mail lors de la validation de l'email
         code = self.code_mail
-
+        self.count += 1
         # si le code correspond, ---> code validé
-        if int(value) == code:
-            instance.foreground_color = (0, 255, 0, 1)
-            self.check_code.text = "code validé"
-            self.submit_code = True
-            self.submit_mail = True
+        if self.count < 3:
+            if int(value) == code:
+                instance.foreground_color = (0, 255, 0, 1)
+                self.check_code.text = "code validé"
+                self.submit_code = True
+                self.submit_mail = True
+                self.code_input.disabled = True
+                self.count = 0
 
+            else:
+                self.code_input.text = ""
+                self.check_code.text = "veuillez réessayer..."
         else:
-            self.check_code.text = "veuillez réessayer..."
+            self.check_code.text = "Nombre de tentatives dépassées..."
+            self.code_input.disabled = True
+            self.password_input.disabled = True
+            self.check_password_input.disabled = True
 
     def getPassword(self, instance, value):
         """
@@ -210,6 +230,8 @@ class InscriptionScreen(Screen):
             instance.foreground_color = (0, 255, 0, 1)
             self.check_password_message.text = "mot de passe confirmé"
             self.submit_password = True
+            self.password_input.disabled = True
+            self.check_password_input.disabled = True
 
         else:
             self.check_password_message.text = "veuillez saisir le meme mot de passe que celui choisi"
@@ -224,13 +246,41 @@ class InscriptionScreen(Screen):
 
         """
         if self.submit_code and self.submit_mail and self.submit_password:
+            user_name = self.prenom_input.text[0] + "." + self.nom_input.text
             mail = self.email_input.text
             hash_pswd = hashPassword(self.password_input.text)
-            submit_data_DB(mail=mail, password=hash_pswd)
+            submit_data_DB(mail=mail, password=hash_pswd, user_name=user_name)
             wm = App.get_running_app().root
             wm.current = 'programWindow'
         else:
             pass
+
+    def clear(self):
+        """
+         ---> fonction permettant de réinitialiser le formulaire d'inscription.
+
+         Pre: /
+
+         Post: Supprime le contenu des champs input.
+        """
+        self.email_input.text = ""
+        self.prenom_input.text = ""
+        self.nom_input.text = ""
+        self.code_input.text = ""
+        self.password_input.text = ""
+        self.check_password_input.text = ""
+
+        self.email_input.disabled = False
+        self.prenom_input.disabled = False
+        self.nom_input.disabled = False
+        self.code_input.disabled = True
+        self.password_input.disabled = False
+        self.check_password_input.disabled = False
+
+        self.code_validation_message.text =""
+        self.check_code.text = ""
+        self.password_input_message.text = "un mot de passe robuste (Maj, chiffre et caractère spécial)"
+        self.check_password_message.text = ""
 
 
 class programWindow(Screen):
