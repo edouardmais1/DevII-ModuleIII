@@ -8,7 +8,6 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 
-
 from Project_functions.Email import *
 from Project_functions.Password import *
 from mongo.mongoConnector import *
@@ -257,12 +256,13 @@ class InscriptionScreen(Screen):
 
     def clear(self):
         """
-         ---> fonction permettant de réinitialiser le formulaire d'inscription.
+        ---> fonction permettant de réinitialiser le formulaire d'inscription.
 
-         Pre: /
+             Pre: -
 
-         Post: Supprime le contenu des champs input.
+             Post: Supprime le contenu des champs input.
         """
+
         self.email_input.text = ""
         self.prenom_input.text = ""
         self.nom_input.text = ""
@@ -277,7 +277,7 @@ class InscriptionScreen(Screen):
         self.password_input.disabled = False
         self.check_password_input.disabled = False
 
-        self.code_validation_message.text =""
+        self.code_validation_message.text = ""
         self.check_code.text = ""
         self.password_input_message.text = "un mot de passe robuste (Maj, chiffre et caractère spécial)"
         self.check_password_message.text = ""

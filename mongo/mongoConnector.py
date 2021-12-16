@@ -3,9 +3,7 @@ from pymongo import MongoClient
 
 class MongoConnector:
     """
-        Cette classe permet de créer une connexion vers la base de données.
-        Veuillez modifier la variable 'certificat_path' avec le chemin vers l'endroit ou se trouve votre certificat.
-        Exemple d'utilisation dans votre code :
+    ---> Cette classe permet de créer une connexion vers la base de données.
 
     """
 
@@ -26,6 +24,9 @@ class MongoConnector:
 
 
 def testConnectionDB():
+    """
+    ---> permet d'effectuer un test de connexion avec la DB et consulter son contenu.
+    """
     try:
         with MongoConnector() as connector:
             collection = connector.db["users"]
@@ -36,6 +37,15 @@ def testConnectionDB():
 
 
 def submit_data_DB(mail, password, user_name):
+    """
+    ---> permet d'enregistrer des données d'un nouvel utilisateur dans la base de données.
+
+         Pre: -
+
+         Post: enregistre les données au sein de la base de données adéquate.
+
+         Raise: Exception si un erreur se produit lors de la tentative de connexion à la base de données.
+    """
     try:
         with MongoConnector() as connector:
             collection = connector.db["users"]
@@ -46,6 +56,16 @@ def submit_data_DB(mail, password, user_name):
 
 
 def connexion(mail, password):
+    """
+    ---> permet d'effetuer une connexion de l'utilisateur dans le programme en vérifiant que les données saisie
+         éxistent au sein de la base de données
+
+         Pre: -
+
+         Post: l'utilisateur doit pouvoir se connecter au programme
+
+         Raise: Exception si un erreur se produit lors de la tentative de connexion à la base de données
+    """
     exist = []
     try:
         with MongoConnector() as connector:
@@ -64,6 +84,15 @@ def connexion(mail, password):
 
 
 def checkAccount(email):
+    """
+    ---> permet de vérifier si l'email d'un utilisateur éxistent déja au sein de la DB lors d'une tentative d'inscription
+
+         Pre: -
+
+         Post: renvoi True si l'email saisi éxiste déja sinon False
+
+         Raise: Exception si une erreur se produit lors d'une tentative de connexion à la base de données
+    """
     exist = []
     try:
         with MongoConnector() as connector:
@@ -82,4 +111,4 @@ def checkAccount(email):
 
 
 if __name__ == '__main__':
-    checkAccount("e.maisin@students.ephec.be")
+    pass
