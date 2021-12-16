@@ -10,7 +10,7 @@ class MongoConnector:
     """
 
     def __init__(self):
-        certificat_path = r"C:\Users\maxim\Documents\Maxime\EPHEC\BAC_2\2TL2-G1.pem"
+        certificat_path = r"C:\Users\User\Desktop\coursBac2\DevBac2\certificatMongo\2TL2-G1.pem"
         uri = "mongodb+srv://cluster0.5i6qo.gcp.mongodb.net/ephecom-2TL2?authSource=%24external&authMechanism=MONGODB" \
               "-X509&retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE "
         client = MongoClient(uri,
@@ -65,5 +65,5 @@ def connexion(mail, password):
 
 if __name__ == '__main__':
     # submit_data_DB("max", "test")
-    print(connexion('m.momin@students.ephec.be', 'a0bf0f085c73745d1064b84a5a4df6c4'))
+    testConnectionDB()
 
