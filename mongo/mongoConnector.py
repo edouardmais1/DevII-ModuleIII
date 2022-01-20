@@ -5,6 +5,10 @@ class MongoConnector:
     """
     ---> Cette classe permet de créer une connexion vers la base de données.
 
+         Pre: /
+
+         Post: /
+
     """
 
     def __init__(self):
@@ -26,6 +30,12 @@ class MongoConnector:
 def testConnectionDB():
     """
     ---> permet d'effectuer un test de connexion avec la DB et consulter son contenu.
+
+         Pre: /
+
+         Post: /
+
+         Raise: Exception si la connexion avec la DB n'a pas pu aboutir.
     """
     try:
         with MongoConnector() as connector:
@@ -40,7 +50,7 @@ def submit_data_DB(mail, password, user_name):
     """
     ---> permet d'enregistrer des données d'un nouvel utilisateur dans la base de données.
 
-         Pre: -
+         Pre: les différents champs de données doivent au préalable avoir été complétés et vérifiés.
 
          Post: enregistre les données au sein de la base de données adéquate.
 
@@ -58,13 +68,13 @@ def submit_data_DB(mail, password, user_name):
 def connexion(mail, password):
     """
     ---> permet d'effetuer une connexion de l'utilisateur dans le programme en vérifiant que les données saisie
-         éxistent au sein de la base de données
+         éxistent au sein de la base de données.
 
-         Pre: -
+         Pre: l'utilisateur doit au préalable éxister dans la base de données.
 
-         Post: l'utilisateur doit pouvoir se connecter au programme
+         Post: l'utilisateur doit pouvoir se connecter au programme.
 
-         Raise: Exception si un erreur se produit lors de la tentative de connexion à la base de données
+         Raise: Exception si un erreur se produit lors de la tentative de connexion à la base de données.
     """
     exist = []
     try:
@@ -85,13 +95,13 @@ def connexion(mail, password):
 
 def checkAccount(email):
     """
-    ---> permet de vérifier si l'email d'un utilisateur éxistent déja au sein de la DB lors d'une tentative d'inscription
+    ---> permet de vérifier si l'email d'un utilisateur éxiste déja au sein de la DB lors d'une tentative d'inscription.
 
          Pre: -
 
-         Post: renvoi True si l'email saisi éxiste déja sinon False
+         Post: renvoi True si l'email saisi éxiste déja sinon False.
 
-         Raise: Exception si une erreur se produit lors d'une tentative de connexion à la base de données
+         Raise: Exception si une erreur se produit lors d'une tentative de connexion à la base de données.
     """
     exist = []
     try:

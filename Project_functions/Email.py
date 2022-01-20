@@ -10,10 +10,11 @@ def get_email_validation(email):
     ---> fonction permettant d'envoyer un mail à l'utilisateur muni d'un code de vérification de l'email afin de
          de vérifier l'identité de l'utilisateur.
 
-         Pre: -
+         Pre : l'email doit au préalable avoir été valider par la fonction checkEmailValidation.
 
-         Post: renvoi un code de validation à l'email saisi
+         Post : renvoi un code de validation à l'email saisi.
     """
+    # nombre aléatoire entre 1000 et 9999
     validation_code = randint(1000, 9999)
 
     sender_address = "noreply@revosta.com"
@@ -37,7 +38,7 @@ def checkEmailValidation(prenom, mail):
 
         Pre: -
 
-        Post: renvoi True si le format de mail saisi respecte le format demandé, sinon False
+        Post: renvoi True si le format de mail saisi respecte le format demandé, sinon False.
     """
     email_prof = "@ephec.be"
     email_students = "@students.ephec.be"
@@ -51,7 +52,3 @@ def checkEmailValidation(prenom, mail):
 
     else:
         return False
-
-
-
-

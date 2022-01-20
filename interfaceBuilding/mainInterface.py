@@ -16,7 +16,11 @@ from mongo.mongoConnector import *
 # Connexion and Inscription screen creation
 class ConnexionScreen(Screen):
     """
-    ---> assure la gestion des connexions au sein de l'application
+    ---> assure la gestion des connexions au sein de l'application et de la Gui Kivy
+
+         Pre: /
+
+         Post: /
 
     """
     email_input = ObjectProperty
@@ -24,11 +28,11 @@ class ConnexionScreen(Screen):
 
     def connexionButton(self):
         """
-        ---> fonction gerant la connexion de l'utilisateur
+        ---> fonction gerant la connexion de l'utilisateur.
 
-        Pre: l'email et le mot de passe choisi doivent au préalable éxister dans la base de données
+        Pre: l'email et le mot de passe choisi doivent au préalable éxister dans la base de données.
 
-        Post: l'utilisateur doit pouvoir se loger au sein de l'application une fois la connexion validée
+        Post: l'utilisateur doit pouvoir se loger au sein de l'application une fois la connexion validée.
 
         """
         mail = self.email_input.text
@@ -43,7 +47,7 @@ class ConnexionScreen(Screen):
 
 class InscriptionScreen(Screen):
     """
-    ---> assure la gestion des inscriptions au sein de l'application à travers différentes méthodes.
+    ---> assure la gestion des inscriptions au sein de l'application à travers différentes méthodes et la Gui Kivy.
 
     """
     # les 6 champs principaux lors de l'inscription de l'utilisateur
@@ -88,11 +92,11 @@ class InscriptionScreen(Screen):
 
     def validPrenom(self, instance, value):
         """
-        ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom
+        ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom.
 
-             Pre: l'utilisateur doit rentrer un prénom valide (pas de caractères spéciaux et chiffres)
+             Pre: l'utilisateur doit rentrer un prénom valide (pas de caractères spéciaux et chiffres).
 
-             Post: valide la saisie de l'utilisateur
+             Post: valide la saisie de l'utilisateur.
         """
         if any(elem.isdigit() for elem in value):
             instance.foreground_color = (1, 0, 0, 1)
@@ -112,11 +116,11 @@ class InscriptionScreen(Screen):
 
     def validNom(self, instance, value):
         """
-        ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom
+        ---> permet à l'utilisateur de rentrer son nom et vérifier la validité du nom.
 
-             Pre: l'utilisateur doit rentrer un prénom valide (pas de caractères spéciaux et chiffres)
+             Pre: l'utilisateur doit rentrer un nom valide (pas de caractères spéciaux et chiffres).
 
-             Post: valide la saisie de l'utilisateur
+             Post: valide la saisie de l'utilisateur.
         """
         if any(elem.isdigit() for elem in value):
             instance.foreground_color = (1, 0, 0, 1)
@@ -136,11 +140,11 @@ class InscriptionScreen(Screen):
     def getEmail(self, instance, value):
         """
         ---> permet d'envoyer un code de validation à l'utilisateur apres une série de procédés
-             visants à valider le format de l'adresse mail saisie
+             visants à valider le format de l'adresse mail saisie.
 
-             Pre: l'utilisateur doit au préalable avoir saisi un prénom et nom valide
+             Pre: l'utilisateur doit au préalable avoir saisi un prénom et nom valide.
 
-             Post: renvoi un mail à l'adresse mail saisie avec un code de validation
+             Post: renvoi un mail à l'adresse mail saisie avec un code de validation.
 
              Raise: IndexError si l'utilisateur valide un champ mail et que les champs prenom et noms sont vides.
         """
@@ -170,11 +174,11 @@ class InscriptionScreen(Screen):
 
     def checkCode(self, instance, value):
         """
-        ---> permet de vérifier l'authenticité du code envoyé par mail à l'utilisateur
+        ---> permet de vérifier l'authenticité du code envoyé par mail à l'utilisateur.
 
-             Pre: l'utilisateur doit au préalable avoir validé son adresse mail
+             Pre: l'utilisateur doit au préalable avoir validé son adresse mail.
 
-             Post: valide la saisie du code de validation
+             Post: valide la saisie du code de validation.
         """
 
         # la valeur du code envoyé précédement par mail lors de la validation de l'email
@@ -203,9 +207,9 @@ class InscriptionScreen(Screen):
         """
         ---> permet la création d'un mot de passe pour le compte du nouvel utilisateur.
 
-             Pre: le mot de passe doit respecter les regles de robustesse
+             Pre: le mot de passe doit respecter les regles de robustesse.
 
-             Post: valide la saisie du mot de passe de l'utilisateur
+             Post: valide la saisie du mot de passe de l'utilisateur.
         """
         self.password_input_message.text = "veuillez saisir un mdp avec au moins : "
         if checkPassword(value):
@@ -223,7 +227,7 @@ class InscriptionScreen(Screen):
 
              Pre: un mot de passe valable doit au préalable avoir été crée.
 
-             Post: valide la conformité des 2 mots de passe saisis dans les champs input adéquats
+             Post: valide la conformité des 2 mots de passe saisis dans les champs input adéquats.
         """
         if value == self.password:
             instance.foreground_color = (0, 255, 0, 1)
@@ -285,14 +289,14 @@ class InscriptionScreen(Screen):
 
 class programWindow(Screen):
     """
-    ---> fenetre kivy contenant le programme apres inscription ou connexion
+    ---> fenetre kivy contenant le programme après inscription ou connexion
     """
     pass
 
 
 class WindowManager(ScreenManager):
     """
-    ---> permet la gestion des interactions entre les plusieur fenetres kivy du programme.
+    ---> permet la gestion des interactions entre les plusieur fenètres kivy du programme.
     """
     Window.size = (1000, 700)
 
