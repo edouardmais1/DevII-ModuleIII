@@ -31,7 +31,7 @@
 Ce projet est l'implémentation du module 3 du projet gobal du cours de Dévellopement Informatique II - 2022.
 Cette partie comporte l'implémentation des parties connexion, inscription ainsi que des permissions de chaque utilisateurs.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">
 
 
 ### Outils
