@@ -10,15 +10,15 @@
   <summary>SOMMAIRE</summary>
   <ol>
     <li>
-      <a href="#a-propos-du-projet">About The Project</a>
+      <a href="#a-propos-du-projet">A propos du projet</a>
       <ul>
-        <li><a href="#outils">Built With</a></li>
+        <li><a href="#outils">Outils</a></li>
       </ul>
     </li>
     <li>
-      <a href="#pour-commencer">Getting Started</a>
+      <a href="#pour-commencer">Pour commencer</a>
       <ul>
-        <li><a href="#prerequis">Prerequisites</a></li>
+        <li><a href="#prerequis">Prérequis</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
   </ol>
