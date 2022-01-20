@@ -16,10 +16,9 @@ def get_email_validation(email):
     """
     # nombre aléatoire entre 1000 et 9999
     validation_code = randint(1000, 9999)
-
     sender_address = "noreply@revosta.com"
     receiver_address = email
-    account_password = "xso4%J91"
+    account_password = "3Il1r@c921yrfW9$"
     subject = "Email verification"
     body = "Salut poto!\n\nEntre ce code pour verifier ton compte : {}!\nWith regards,\n\tDeveloper".format(
         validation_code)
@@ -27,7 +26,6 @@ def get_email_validation(email):
     with smtplib.SMTP_SSL("smtp.revosta.com", 465) as smtp_server:
         smtp_server.login(sender_address, account_password)
         message = f"Subject: {subject}\n\n{body}"
-
         smtp_server.sendmail(sender_address, receiver_address, message)
         return validation_code
 

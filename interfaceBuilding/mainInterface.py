@@ -16,7 +16,7 @@ from mongo.mongoConnector import *
 # Connexion and Inscription screen creation
 class ConnexionScreen(Screen):
     """
-    ---> assure la gestion des connexions au sein de l'application et de la Gui Kivy
+    ---> Assure la gestion des connexions au sein de l'application et de la Gui Kivy.
 
          Pre: /
 
@@ -28,7 +28,7 @@ class ConnexionScreen(Screen):
 
     def connexionButton(self):
         """
-        ---> fonction gerant la connexion de l'utilisateur.
+        ---> Fonction gerant la connexion de l'utilisateur.
 
         Pre: l'email et le mot de passe choisi doivent au préalable éxister dans la base de données.
 
