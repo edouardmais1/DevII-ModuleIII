@@ -11,6 +11,7 @@ from kivy.core.window import Window
 from Project_functions.Email import *
 from Project_functions.Password import *
 from mongo.mongoConnector import *
+from Project_functions.check import *
 
 
 # Connexion and Inscription screen creation
@@ -19,7 +20,6 @@ class ConnexionScreen(Screen):
     ---> Assure la gestion des connexions au sein de l'application et de la Gui Kivy.
 
          Pre: /
-
          Post: /
 
     """
@@ -28,26 +28,28 @@ class ConnexionScreen(Screen):
 
     def connexionButton(self):
         """
-        ---> Fonction gerant la connexion de l'utilisateur.
+        ---> Fonction gestionnaire du bouton de connexion de l'utilisateur.
 
-        Pre: l'email et le mot de passe choisi doivent au préalable éxister dans la base de données.
-
+        Pre: l'email et le mot de passe choisis doivent au préalable éxister dans la base de données.
         Post: l'utilisateur doit pouvoir se loger au sein de l'application une fois la connexion validée.
 
         """
-        mail = self.email_input.text
-        hash_pswd = hashPassword(self.password_input.text)
-        if connexion(mail=mail, password=hash_pswd):
-            wm = App.get_running_app().root
-            wm.current = 'programWindow'
-
-        else:
-            return False
+        try:
+            mail = self.email_input.text
+            hash_pswd = hashPassword(self.password_input.text)
+            if connexion(mail=mail, password=hash_pswd):
+                wm = App.get_running_app().root
+                wm.current = 'programWindow'
+            else:
+                return False
+        except Exception as e:
+            print(e)
 
 
 class InscriptionScreen(Screen):
     """
-    ---> assure la gestion des inscriptions au sein de l'application à travers différentes méthodes et la Gui Kivy.
+    ---> Assure la gestion des inscriptions au sein de l'application à travers différentes méthodes ainsi que
+         la Gui Kivy.
 
     """
     # les 6 champs principaux lors de l'inscription de l'utilisateur
@@ -79,6 +81,9 @@ class InscriptionScreen(Screen):
     # variable contenant le prénom de l'utilisateur
     prenom = ""
 
+    # variable contenant le nom de l'utilisateur
+    nom = ""
+
     # préconditions du submit (test de validité des informations saisie au préalable avant un quelconque submit)
     submit_code = False
     submit_password = False
@@ -92,74 +97,51 @@ class InscriptionScreen(Screen):
 
     def validPrenom(self, instance, value):
         """
-        ---> permet à l'utilisateur de rentrer son prénom et vérifier la validité du prénom.
+        ---> Permet à l'utilisateur de rentrer son prénom et vérifier la validité de celui-ci.
 
              Pre: l'utilisateur doit rentrer un prénom valide (pas de caractères spéciaux et chiffres).
-
              Post: valide la saisie de l'utilisateur.
         """
-        if any(elem.isdigit() for elem in value):
+        if not checkValidPrenomNom(value):
             instance.foreground_color = (1, 0, 0, 1)
-
-        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(value):
-            instance.foreground_color = (1, 0, 0, 1)
-
-        elif len(value) <= 3:
-            instance.foreground_color = (1, 0, 0, 1)
-
-        elif len(value) >= 20:
-            instance.foreground_color = (1, 0, 0, 1)
-
         else:
             instance.foreground_color = (0, 255, 0, 1)
             self.prenom = value
 
     def validNom(self, instance, value):
         """
-        ---> permet à l'utilisateur de rentrer son nom et vérifier la validité du nom.
+        ---> Permet à l'utilisateur de rentrer son nom et vérifier la validité de celui-ci.
 
              Pre: l'utilisateur doit rentrer un nom valide (pas de caractères spéciaux et chiffres).
-
              Post: valide la saisie de l'utilisateur.
         """
-        if any(elem.isdigit() for elem in value):
+        if not checkValidPrenomNom(value):
             instance.foreground_color = (1, 0, 0, 1)
-
-        elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(value):
-            instance.foreground_color = (1, 0, 0, 1)
-
-        elif len(value) <= 3:
-            instance.foreground_color = (1, 0, 0, 1)
-
-        elif len(value) >= 20:
-            instance.foreground_color = (1, 0, 0, 1)
-
         else:
             instance.foreground_color = (0, 255, 0, 1)
+            self.nom = value
 
     def getEmail(self, instance, value):
         """
-        ---> permet d'envoyer un code de validation à l'utilisateur apres une série de procédés
-             visants à valider le format de l'adresse mail saisie.
+        ---> Permet d'envoyer un code de validation par mail à l'utilisateur après une série de vérifications
+             du format de l'adresse mail saisie.
 
-             Pre: l'utilisateur doit au préalable avoir saisi un prénom et nom valide.
-
-             Post: renvoi un mail à l'adresse mail saisie avec un code de validation.
-
+             Pre: l'utilisateur doit au préalable avoir saisi un prénom et un nom valides.
+             Post: renvoie un mail à l'adresse mail saisie avec un code de validation.
              Raise: IndexError si l'utilisateur valide un champ mail et que les champs prenom et noms sont vides.
         """
         prenom = self.prenom.lower()
 
         try:
             # check if the email format is ok
-            if checkEmailValidation(prenom, value):
+            if checkEmailValidation(prenom, value) and self.nom != "":
                 if not checkAccount(self.email_input.text):
                     instance.foreground_color = (0, 255, 0, 1)
 
                     # envoi d'un code de validation à l'utilisateur
                     self.code_mail = get_email_validation(value)
                     self.code_input.disabled = False
-                    self.code_validation_message.text = "un code de validation vous a été envoyé"
+                    self.code_validation_message.text = "Un code de validation vous a été envoyé"
                     self.email_input.disabled = True
                     self.prenom_input.disabled = True
                     self.nom_input.disabled = True
@@ -170,14 +152,13 @@ class InscriptionScreen(Screen):
                 instance.foreground_color = (1, 0, 0, 1)
 
         except IndexError:
-            self.code_validation_message.text = "veuillez au préalable avoir rempli votre prenom et nom"
+            self.code_validation_message.text = "Veuillez au préalable avoir rempli votre prenom et nom"
 
     def checkCode(self, instance, value):
         """
-        ---> permet de vérifier l'authenticité du code envoyé par mail à l'utilisateur.
+        ---> Permet de vérifier l'identité de l'utilisateur via le code reçu sur son adresse mail personnelle.
 
              Pre: l'utilisateur doit au préalable avoir validé son adresse mail.
-
              Post: valide la saisie du code de validation.
         """
 
@@ -205,28 +186,27 @@ class InscriptionScreen(Screen):
 
     def getPassword(self, instance, value):
         """
-        ---> permet la création d'un mot de passe pour le compte du nouvel utilisateur.
+        ---> Permet la création d'un mot de passe pour le compte du nouvel utilisateur.
 
-             Pre: le mot de passe doit respecter les regles de robustesse.
-
+             Pre: le mot de passe doit respecter les règles de robustesses définies.
              Post: valide la saisie du mot de passe de l'utilisateur.
         """
-        self.password_input_message.text = "veuillez saisir un mdp avec au moins : "
+        self.password_input_message.text = "Veuillez saisir un mot-de-pass avec au moins : (1 Maj, Chiffre et " \
+                                           "1 caractère spécial) "
         if checkPassword(value):
             instance.foreground_color = (0, 255, 0, 1)
             self.password_input_message.text = "password assez robuste"
             self.password = value
 
         else:
-            self.password_input_message.text = "mot de passe contenant au moins : (1 Maj, chiffre et " \
-                                               "caractère spécial) "
+            self.password_input_message.text = "Veuillez saisir un mot-de-pass avec au moins : (1 Maj, Chiffre et " \
+                                               "1 caractère spécial) "
 
     def checkPassword(self, instance, value):
         """
-        ---> fonction permettant de confirmer le mot de passe saisi par l'utilisateur.
+        ---> Permet de confirmer le mot de passe saisi par l'utilisateur.
 
              Pre: un mot de passe valable doit au préalable avoir été crée.
-
              Post: valide la conformité des 2 mots de passe saisis dans les champs input adéquats.
         """
         if value == self.password:
@@ -237,15 +217,16 @@ class InscriptionScreen(Screen):
             self.check_password_input.disabled = True
 
         else:
-            self.check_password_message.text = "veuillez saisir le meme mot de passe que celui choisi"
+            self.check_password_message.text = "Veuillez saisir le même mot de passe que celui choisi précédemment."
 
     def Submit(self):
         """
-        ---> fonction permettant de soumettre les données a la base de données pour achever l'inscription de l'utilisateur
+        ---> Fonction permettant de soumettre les données a la base de données pour achever l'inscription
+             de l'utilisateur.
 
-             Pre: l'email, le code de validation et le Mot de passe doivent au préalable avoir été checkés et validés
-
-             Post: créer une connexion avec le serveur de base de donnée et enrgistre les données dans la collection adéquate
+             Pre: l'email, le code de validation et le Mot de passe doivent au préalable avoir été vérifiés et validés.
+             Post: crée une connexion avec le serveur de base de donnée et enregistre les données dans
+             la collection adéquate.
 
         """
         if self.submit_code and self.submit_mail and self.submit_password:
@@ -260,10 +241,9 @@ class InscriptionScreen(Screen):
 
     def clear(self):
         """
-        ---> fonction permettant de réinitialiser le formulaire d'inscription.
+        ---> Fonction permettant de réinitialiser le formulaire d'inscription.
 
              Pre: -
-
              Post: Supprime le contenu des champs input.
         """
 
@@ -283,20 +263,26 @@ class InscriptionScreen(Screen):
 
         self.code_validation_message.text = ""
         self.check_code.text = ""
-        self.password_input_message.text = "un mot de passe robuste (Maj, chiffre et caractère spécial)"
+        self.password_input_message.text = "Un mot de passe robuste (Maj, chiffre et caractère spécial)"
         self.check_password_message.text = ""
 
 
 class programWindow(Screen):
     """
-    ---> fenetre kivy contenant le programme après inscription ou connexion
+    ---> Fenêtre kivy contenant le programme après inscription ou connexion.
+
+         Pre: -
+         Post: -
     """
     pass
 
 
 class WindowManager(ScreenManager):
     """
-    ---> permet la gestion des interactions entre les plusieur fenètres kivy du programme.
+    ---> Permet la gestion des interactions entre les différentes fenêtres kivy du programme.
+
+         Pre: -
+         Post: -
     """
     Window.size = (1000, 700)
 

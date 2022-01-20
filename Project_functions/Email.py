@@ -7,12 +7,11 @@ import smtplib
 
 def get_email_validation(email):
     """
-    ---> fonction permettant d'envoyer un mail à l'utilisateur muni d'un code de vérification de l'email afin de
+    ---> Fonction permettant d'envoyer un mail à l'utilisateur muni d'un code de vérification afin de
          de vérifier l'identité de l'utilisateur.
 
-         Pre : l'email doit au préalable avoir été valider par la fonction checkEmailValidation.
-
-         Post : renvoi un code de validation à l'email saisi.
+         Pre : l'email doit au préalable avoir été valider par la fonction checkEmailValidation().
+         Post : renvoie un code de validation à l'adresse email saisie.
     """
     # nombre aléatoire entre 1000 et 9999
     validation_code = randint(1000, 9999)
@@ -20,7 +19,7 @@ def get_email_validation(email):
     receiver_address = email
     account_password = "3Il1r@c921yrfW9$"
     subject = "Email verification"
-    body = "Salut poto!\n\nEntre ce code pour verifier ton compte : {}!\nWith regards,\n\tDeveloper".format(
+    body = "Bonjour !\n\nEntrez ce code pour verifier votre compte : {}!\nRemerciemments,\n\tDevelopers".format(
         validation_code)
 
     with smtplib.SMTP_SSL("smtp.revosta.com", 465) as smtp_server:
@@ -32,11 +31,10 @@ def get_email_validation(email):
 
 def checkEmailValidation(prenom, mail):
     """
-    --->fonction permettant de vérifier le format de l'adresse mail saisie par l'utilisateur
+    ---> Fonction permettant de vérifier le format de l'adresse mail saisie par l'utilisateur
 
         Pre: -
-
-        Post: renvoi True si le format de mail saisi respecte le format demandé, sinon False.
+        Post: renvoie True si le format de l'adresse mail saisie respecte le format demandé, sinon False.
     """
     email_prof = "@ephec.be"
     email_students = "@students.ephec.be"
@@ -44,9 +42,7 @@ def checkEmailValidation(prenom, mail):
     if prenom[0] == mail[0]:
         if email_prof in mail or email_students in mail:
             return True
-
         else:
             return False
-
     else:
         return False

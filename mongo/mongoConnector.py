@@ -3,11 +3,10 @@ from pymongo import MongoClient
 
 class MongoConnector:
     """
-    ---> Cette classe permet de créer une connexion vers la base de données.
+    ---> Cette classe permet d'initialiser une connexion vers la base de données.
 
-         Pre: /
-
-         Post: /
+         Pre: -
+         Post: -
 
     """
 
@@ -29,12 +28,10 @@ class MongoConnector:
 
 def testConnectionDB():
     """
-    ---> permet d'effectuer un test de connexion avec la DB et consulter son contenu.
+    ---> Permet d'effectuer un test de connexion avec la DB et consulter son contenu.
 
-         Pre: /
-
-         Post: /
-
+         Pre: -
+         Post: -
          Raise: Exception si la connexion avec la DB n'a pas pu aboutir.
     """
     try:
@@ -48,33 +45,28 @@ def testConnectionDB():
 
 def submit_data_DB(mail, password, user_name):
     """
-    ---> permet d'enregistrer des données d'un nouvel utilisateur dans la base de données.
+    ---> Permet de soumettre les différentes données d'un nouvel utilisateur dans la base de données.
 
          Pre: les différents champs de données doivent au préalable avoir été complétés et vérifiés.
-
          Post: enregistre les données au sein de la base de données adéquate.
-
-         Raise: Exception si un erreur se produit lors de la tentative de connexion à la base de données.
+         Raise: Exception si une erreur se produit lors de la tentative de connexion à la base de données.
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["users"]
             collection.insert_one({"mail": mail, "password": password, "user_name": user_name})
-
     except Exception as e:
         print(e)
 
 
 def connexion(mail, password):
     """
-    ---> permet d'effetuer une connexion de l'utilisateur dans le programme en vérifiant que les données saisie
+    ---> Permet d'effetuer une connexion d'un utilisateur en vérifiant que les données saisies
          éxistent au sein de la base de données.
 
          Pre: l'utilisateur doit au préalable éxister dans la base de données.
-
-         Post: l'utilisateur doit pouvoir se connecter au programme.
-
-         Raise: Exception si un erreur se produit lors de la tentative de connexion à la base de données.
+         Post: l'utilisateur est connecté.
+         Raise: Exception si une erreur se produit lors de la tentative de connexion à la base de données.
     """
     exist = []
     try:
@@ -95,12 +87,10 @@ def connexion(mail, password):
 
 def checkAccount(email):
     """
-    ---> permet de vérifier si l'email d'un utilisateur éxiste déja au sein de la DB lors d'une tentative d'inscription.
+    ---> Permet de vérifier si l'email d'un utilisateur éxiste déja au sein de la DB lors d'une tentative d'inscription.
 
          Pre: -
-
-         Post: renvoi True si l'email saisi éxiste déja sinon False.
-
+         Post: renvoie True si l'email saisie éxiste déja, sinon False.
          Raise: Exception si une erreur se produit lors d'une tentative de connexion à la base de données.
     """
     exist = []
