@@ -51,6 +51,7 @@ Cette implémentation à été réalisé lors d'un projet commmun par 4 étudian
 * Convention de code -> PEP8 https://www.python.org/dev/peps/pep-0008/
 
 
+  
 <!-- POUR COMMENCER -->
 ## Pour Commencer
 
@@ -76,6 +77,8 @@ Une interface graphique devrait se lancer et vous pourrez dés-lors effectuer un
 - [ Clockify ] - https://clockify.me/  
 
 
+  
+  
 <!-- CONTACTS -->
 ## Contacts
   
