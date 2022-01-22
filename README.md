@@ -23,9 +23,9 @@
       </ul>
     </li>
     <li>
-      <a href="#contact">Contacts</a>
+      <a href="#contacts">Contacts</a>
       <ul>
-        <li><a href="#nous-contacter">Nous contacter ?</a></li>
+        <li><a href="#nous-contacter-?">Nous contacter ?</a></li>
       </ul>
     </li>
   </ol>
