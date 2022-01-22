@@ -73,11 +73,9 @@ Une interface graphique devrait se lancer et vous pourrez dés-lors effectuer un
 - [Github Project]
 - Pycharm (License éducative) - https://www.jetbrains.com/fr-fr/pycharm/
 - Python 3.8+ - https://www.python.org/downloads/
-- Environnements virtuels - https://docs.python.org/3/library/venv.html
-- [ Clockify ] - https://clockify.me/  
+- Environnements virtuels - https://docs.python.org/3/library/venv.html  
 
 
-  
   
 <!-- CONTACTS -->
 ## Contacts
