@@ -23,7 +23,14 @@ def owner_server(userID, serverID):
         print(e)
 
 def can_read(userID, serverID):
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["role_user"]
+            user = collection.find_one({"server": serverID, "user": userID})
+    except Exception as e:
+        print(e)
 
+    print(user)
 
 
 
@@ -59,3 +66,4 @@ def change_role(userID, serverID, roleID):
         print("Erreur. Vous n'avez pas l'autorisation nécessaire afin de changer un rôle.")
         return 1
 
+can_read("userID", "serverID")
