@@ -7,26 +7,26 @@ from mongo.mongoConnector import *
 
 def on_join(userID, serverID):
     """
-        Set role to Guest
-        PRE :
-            userID : string -> Email address of a specific user
-            serverID : string -> ID of a specific server
-        POST :
-            return 0
-    """
+        ---> Permet de définir le rôle d'un nouveau membre sur un serveur à invité.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
+        """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
             collection.insert_one({"server": serverID, "user": userID, "role": 0})
     except Exception as e:
         print(e)
-    return 0
 
 def owner_server(userID, serverID):
     """
-        Guest : True
-        Member : True
-        Admin : True,
+        ---> Permet de définir le rôle du créateur du serveur à admin.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
     """
     try:
         with MongoConnector() as connector:
@@ -39,15 +39,27 @@ def can_read(userID, serverID):
     """
         Guest : True
         Member : True
-        Admin : True,
+        Admin : True
+
+        ---> Autorise la lecture. Pas utile pour le moment, mais dans le futur, peut permettre d'ajouter un groupe muet, et d'interdire à certaines personnes de communiquer.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
     """
     return True
 
 def can_write(userID, serverID):
     """
-        Guest : True
+        Guest : False
         Member : True
-        Admin : True,
+        Admin : True
+
+        ---> Autorise l'écriture au membre si son groupe est l'un des groupes autorisés.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
     """
     try:
         with MongoConnector() as connector:
@@ -56,50 +68,132 @@ def can_write(userID, serverID):
     except Exception as e:
         print(e)
 
-    if user["role"] > 0:
+    if 0 < user["role"] < 3:
         return True
-    else
+    else:
         return False
-
 
 def can_join_file(userID, serverID):
     """
-        Guest : True
+        Guest : False
         Member : True
-        Admin : True,
+        Admin : True
+
+        ---> Autorise l'envoie de fichier au membre si son groupe est l'un des groupes autorisés.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
     """
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["role_user"]
+            user = collection.find_one({"server": serverID, "user": userID})
+    except Exception as e:
+        print(e)
+
+    if 0 < user["role"] < 3:
+        return True
+    else:
+        return False
+
 
 
 def can_add(userID, serverID):
     """
         Guest : True
         Member : True
-        Admin : True,
-    """
+        Admin : True
 
+        ---> Autorise un membre à ajouter des membres au serveur si son groupe y est autorisé.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
+    """
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["role_user"]
+            user = collection.find_one({"server": serverID, "user": userID})
+    except Exception as e:
+        print(e)
+
+    if user["role"] == 2:
+        return True
+    else:
+        return False
 
 def can_change_role(userID, serverID):
     """
         Guest : True
         Member : True
-        Admin : True,
-    """
+        Admin : True
 
+        ---> Autorise un membre à changer le rôles des membres si son groupe y est autorisé.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
+    """
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["role_user"]
+            user = collection.find_one({"server": serverID, "user": userID})
+    except Exception as e:
+        print(e)
+
+    if user["role"] == 2:
+        return True
+    else:
+        return False
 
 def can_ban(userID, serverID):
     """
         Guest : True
         Member : True
-        Admin : True,
-    """
+        Admin : True
 
+        ---> Autorise un membre à bannir des membres du serveur si son groupe y est autorisé.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
+    """
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["role_user"]
+            user = collection.find_one({"server": serverID, "user": userID})
+    except Exception as e:
+        print(e)
+
+    if user["role"] == 2:
+        return True
+    else:
+        return False
 
 def can_change_channel(userID, serverID):
     """
         Guest : True
         Member : True
-        Admin : True,
+        Admin : True
+
+        ---> Autorise un membre à modifier un canal du serveur si son groupe y est autorisé.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
     """
+    try:
+        with MongoConnector() as connector:
+            collection = connector.db["role_user"]
+            user = collection.find_one({"server": serverID, "user": userID})
+    except Exception as e:
+        print(e)
+
+    if user["role"] == 2:
+        return True
+    else:
+        return False
 
 def change_role(userID, serverID, roleID):
     """
