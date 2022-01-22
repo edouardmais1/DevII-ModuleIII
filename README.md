@@ -45,7 +45,7 @@ Cette implémentation à été réalisé lors d'un projet commmun par 4 étudian
 <!-- POUR COMMENCER -->
 ## Pour Commencer
 
-Ce repository contient comme dit précédemment, uniquement la partie traitant des inscriptions, connexions et permissions. Pour pouvoir avoir la globalité du projet noyau, veuillez vous rendre sur le lien github ci-joint: <a href: https://github.com/jnoelEphec/noyau_devII> Lien vers Repository Noyau</a>
+Ce repository contient comme dit précédemment, uniquement la partie traitant des inscriptions, connexions et permissions. Pour pouvoir avoir la globalité du projet noyau, veuillez vous rendre sur le lien github ci-joint: https://github.com/jnoelEphec/noyau_devII> 
 
 ### Prérequis
 ### Installation
