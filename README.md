@@ -21,6 +21,13 @@
         <li><a href="#prerequis">Prérequis</a></li>
         <li><a href="#exécution">Exécution</a></li>
       </ul>
+    </li>
+    <li>
+      <a href="#contact">Contacts</a>
+      <ul>
+        <li><a href="#nous-contacter">Nous contacter ?</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -56,6 +63,17 @@ Ce repository contient comme dit précédemment, uniquement la partie traitant d
 
 Pour exécuter ce module, il vous faut lancer le fichier "main.py".
 Une interface graphique devrait se lancer et vous pourrez dés-lors effectuer une inscription/connexion. Vos inscriptions seront enregistré dans une base de donnée distante géré par mongoDB.
+
+
+<!-- CONTACTS -->
+## Contacts
+  
+### Nous contacter ?
+  
+* m.momin@students.ephec.be
+* e.maisin@students.ephec.be
+* g.falla@students.ephec.be
+* f.detroz@students.ephec.be
 
   
 
