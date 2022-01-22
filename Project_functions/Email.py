@@ -19,7 +19,7 @@ def get_email_validation(email):
     receiver_address = email
     account_password = "3Il1r@c921yrfW9$"
     subject = "Email verification"
-    body = "Bonjour !\n\nEntrez ce code pour verifier votre compte : {}!\nRemerciemments,\n\tDevelopers".format(
+    body = "Bonjour !\n\nEntrez ce code pour verifier votre compte : {}\nRemerciemments,\n\tDevelopers".format(
         validation_code)
 
     with smtplib.SMTP_SSL("smtp.revosta.com", 465) as smtp_server:

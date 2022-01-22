@@ -1,0 +1,319 @@
+#:import App kivy.app.App
+
+WindowManager:
+    ConnexionScreen:
+    InscriptionScreen:
+    programWindow:
+
+
+<programWindow>:
+    name: "programWindow"
+    Label:
+        text: "Welcome to the App"
+
+
+<ConnexionScreen>:
+    email_input : email
+    password_input : password
+    name : "first"
+    canvas.before:
+        Color:
+            rgba : (0,0,0,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    BoxLayout:
+        orientation : 'vertical'
+        size : root.width, root.height
+
+        spacing : 20
+        padding : 20
+
+
+        Label:
+            text : "Login to EpheConv"
+            font_size : 30
+
+        Label:
+            text : "email"
+            size_hint : (None, None)
+            height : 50
+            width : 200
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        TextInput:
+            id : email
+            multiline : False
+
+        Label:
+            text : "password"
+            size_hint : (None, None)
+            height : 50
+            width : 200
+            canvas.before:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+        TextInput:
+            id : password
+            multiline : False
+            password: True
+
+        Button:
+            text: "Sign IN"
+            font_size : 25
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            on_release: root.connexionButton()
+
+
+            canvas:
+                Color:
+                    rgba : (148, 204, 0, 0.5)
+
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+
+        BoxLayout:
+            orientation : "horizontal"
+            spacing: 20
+
+            Label:
+                text : "New to EpheConv ?"
+                font_size: 25
+
+            Button:
+                text: "Create an account"
+                font_size : 25
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                on_release:
+                    app.root.current = "second"
+                    root.manager.transition.direction = "up"
+                    root.manager.transition.duration = 0.4
+
+
+
+<InscriptionScreen>:
+    prenom_input : prenom
+    nom_input: nom
+    email_input: email
+    code_input : code
+    code_validation_message : msg
+    check_code : check_code
+    password_input : password
+    password_input_message : password_message
+    check_password_input : check_password_validation
+    check_password_message: check_password_message
+
+    name : "second"
+    canvas.before:
+        Color:
+            rgba : (0,0,0,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "Prenom"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                TextInput:
+                    id: prenom
+                    disabled : False
+                    on_text_validate: root.validPrenom(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
+
+                Label:
+
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "Nom"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                TextInput:
+                    id: nom
+                    disabled : False
+                    on_text_validate: root.validNom(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
+
+                Label:
+
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "Email"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                TextInput:
+                    id: email
+                    on_text_validate: root.getEmail(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
+                    disabled : False
+
+                Label:
+                    id: msg
+                    text: 'veuillez saisir votre adresse mail ephec'
+
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "Code Validation"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                TextInput:
+                    id: code
+                    disabled : True
+                    on_text_validate: root.checkCode(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
+
+                Label:
+                    id: check_code
+                    text: ""
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "Password"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                TextInput:
+                    id: password
+                    disabled : False
+                    password: True
+                    on_text_validate: root.getPassword(self, self.text)
+                    on_text: self.foreground_color=(1,0,0,1)
+                    multiline: False
+
+                Label:
+                    text: "un mot de passe robuste (Maj, chiffre et caractère spécial)"
+                    id: password_message
+
+            BoxLayout:
+                orientation : "vertical"
+                spacing: 20
+                padding: 20
+
+                Label:
+                    text : "CheckPassword"
+                    font_size: 25
+                    canvas.before:
+                        Color:
+                            rgba : (148, 204, 0, 0.5)
+
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                TextInput:
+                    password: True
+                    id: check_password_validation
+                    disabled : False
+                    on_text: self.foreground_color = (1,0,0,1)
+                    on_text_validate: root.checkPassword(self, self.text)
+                    multiline : False
+
+                Label:
+                    id: check_password_message
+                    text: "veuillez valider le mot de passe saisi"
+
+
+        BoxLayout:
+            orientation : "horizontal"
+            spacing : 20
+            padding: 20
+            size_hint_y : None
+            height: 100
+
+            Button:
+                text: "Submit"
+                font_size : 25
+                on_release: root.Submit()
+
+            Button:
+                text: "Go Back"
+                font_hint: None, None
+                on_release:
+                    root.clear()
+                    app.root.current = "first"
+                    root.manager.transition.direction = "down"
+                    root.manager.transition.duration = 0.4
