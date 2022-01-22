@@ -19,6 +19,8 @@ class MongoConnector:
                              tlsCertificateKeyFile=certificat_path)
         self.db = client['ephecom-2TL2']
 
+        role_user_collection = db.get_collection("role_user")
+
     def __enter__(self):
         return self
 
