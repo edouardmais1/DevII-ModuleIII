@@ -35,7 +35,7 @@
 <!-- A PROPOS DU PROJET -->
 ## A propos du projet
 
-Ce repository Github contient l'implémentaion du module 3 du projet noyau visant à réaliser une application bureau de messagerie entièrement réalisé sous python.
+Ce repository Github contient l'implémentaion du module 3 du projet noyau visant à réaliser une application bureau de messagerie multi-plateformes entièrement réalisé sous python.
 Ce repository comporte l'implémentation des parties connexion, inscription ainsi que des permissions de chaque utilisateurs.
 Cette implémentation à été réalisé lors d'un projet commmun par 4 étudiants dans le cadre du cours de Développement II - 2022.
 
@@ -45,8 +45,8 @@ Cette implémentation à été réalisé lors d'un projet commmun par 4 étudian
 ### A savoir
 
 * Python -> Python 3.8 ou +
-* Kivy -> GUI Kivy 2.0
-* MongoDB -> Support de base de donnée 
+* Kivy -> GUI Kivy 2.0 -> https://kivy.org/doc/stable/api-kivy.html
+* MongoDB -> Support de base de donnée -> https://www.mongodb.com/fr-fr/cloud/atlas
 * Convention de code -> PEP8 https://www.python.org/dev/peps/pep-0008/
 
 
