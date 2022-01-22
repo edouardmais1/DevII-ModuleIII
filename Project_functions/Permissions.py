@@ -30,11 +30,11 @@ def can_read(userID, serverID):
     except Exception as e:
         print(e)
 
-    print(user)
+    print(user["role"])
 
 
 
-def can_write(userID, serverID):
+"""def can_write(userID, serverID):
 
 
 def can_join_file(userID, serverID):
@@ -65,5 +65,5 @@ def change_role(userID, serverID, roleID):
     else:
         print("Erreur. Vous n'avez pas l'autorisation nécessaire afin de changer un rôle.")
         return 1
-
+"""
 can_read("userID", "serverID")
