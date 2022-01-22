@@ -20,6 +20,7 @@
       <ul>
         <li><a href="#prerequis">Prérequis</a></li>
         <li><a href="#exécution">Exécution</a></li>
+        <li><a href="#outils">Outils</a></li>
       </ul>
     </li>
     <li>
@@ -64,6 +65,15 @@ Ce repository contient comme dit précédemment, uniquement la partie traitant d
 
 Pour exécuter ce module, il vous faut lancer le fichier "main.py".
 Une interface graphique devrait se lancer et vous pourrez dés-lors effectuer une inscription/connexion. Vos inscriptions seront enregistré dans une base de donnée distante géré par mongoDB.
+
+  
+### Outils
+- Git/Github - https://github.com/
+- [Github Project]
+- Pycharm (License éducative) - https://www.jetbrains.com/fr-fr/pycharm/
+- Python 3.8+ - https://www.python.org/downloads/
+- Environnements virtuels - https://docs.python.org/3/library/venv.html
+- [ Clockify ] - https://clockify.me/  
 
 
 <!-- CONTACTS -->
