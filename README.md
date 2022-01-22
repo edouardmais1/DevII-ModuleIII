@@ -19,7 +19,7 @@
       <a href="#pour-commencer">Pour commencer</a>
       <ul>
         <li><a href="#prerequis">Prérequis</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#exécution">Exécution</a></li>
       </ul>
   </ol>
 </details>
@@ -45,11 +45,19 @@ Cette implémentation à été réalisé lors d'un projet commmun par 4 étudian
 <!-- POUR COMMENCER -->
 ## Pour Commencer
 
-Ce repository contient comme dit précédemment, uniquement la partie traitant des inscriptions, connexions et permissions. Pour pouvoir avoir la globalité du projet noyau, veuillez vous rendre sur le lien github ci-joint: https://github.com/jnoelEphec/noyau_devII> 
+Ce repository contient comme dit précédemment, uniquement la partie traitant des inscriptions, connexions et permissions. Pour pouvoir avoir la globalité du projet noyau, veuillez vous rendre sur le lien github ci-joint: https://github.com/jnoelEphec/noyau_devII
 
 ### Prérequis
-### Installation
+  
+* Avoir installé préalablement Python dans sa version 3.8 minimum.
+* Avoir pris connaissance et installer les différents modules contenus dans le fichier "requirements.txt".
 
+### Exécution
+
+Pour exécuter ce module, il vous faut lancer le fichier "main.py".
+Une interface graphique devrait se lancer et vous pourrez dés-lors effectuer une inscription/connexion. Vos inscriptions seront enregistré dans une base de donnée distante géré par mongoDB.
+
+  
 
 
 
