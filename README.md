@@ -12,7 +12,7 @@
     <li>
       <a href="#a-propos-du-projet">A propos du projet</a>
       <ul>
-        <li><a href="#outils">Outils</a></li>
+        <li><a href="#a-savoir">A savoir</a></li>
       </ul>
     </li>
     <li>
@@ -42,11 +42,12 @@ Cette implémentation à été réalisé lors d'un projet commmun par 4 étudian
 <p align="right">
 
 
-### Outils
+### A savoir
 
 * Python -> Python 3.8 ou +
 * Kivy -> GUI Kivy 2.0
-* MongoDB -> Support de base de donnée
+* MongoDB -> Support de base de donnée 
+* Convention de code -> PEP8 https://www.python.org/dev/peps/pep-0008/
 
 
 <!-- POUR COMMENCER -->
