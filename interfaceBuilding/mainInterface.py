@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.config import Config

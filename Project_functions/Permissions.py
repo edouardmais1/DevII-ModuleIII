@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
 from mongo.mongoConnector import *
+
 """
 - 0_Guest, 1_Member, 2_Admin --> [1,0,0,0,0,0,0], [1,1,1,0,0,0,0], [1,1,1,1,1,1,1]
 - Crée un serveur, perm de ce serveur ADMIN
 - [lire, écrire, "partage de fichier", ajouter membre, modifier role de qq, supprimer qq, modification de channel]
 """
+
 
 def on_join(userID, serverID):
     """
@@ -11,7 +14,6 @@ def on_join(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
         """
     try:
         with MongoConnector() as connector:
@@ -20,22 +22,23 @@ def on_join(userID, serverID):
     except Exception as e:
         print(e)
 
-def owner_server(userID, serverID):
+
+def owner_server(user_id, server_id):
     """
         ---> Permet de définir le rôle du créateur du serveur à admin.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            collection.insert_one({"server": serverID, "user": userID, "role": 2})
+            collection.insert_one({"server": server_id, "user": user_id, "role": 2})
     except Exception as e:
         print(e)
 
-def can_read(userID, serverID):
+
+def can_read(user_id, serverID):
     """
         Guest : True
         Member : True
@@ -45,11 +48,11 @@ def can_read(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     return True
 
-def can_write(userID, serverID):
+
+def can_write(user_id, server_id):
     """
         Guest : False
         Member : True
@@ -59,12 +62,11 @@ def can_write(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            user = collection.find_one({"server": serverID, "user": userID})
+            user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
 
@@ -73,7 +75,8 @@ def can_write(userID, serverID):
     else:
         return False
 
-def can_join_file(userID, serverID):
+
+def can_join_file(user_id, server_id):
     """
         Guest : False
         Member : True
@@ -83,12 +86,11 @@ def can_join_file(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            user = collection.find_one({"server": serverID, "user": userID})
+            user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
 
@@ -98,8 +100,7 @@ def can_join_file(userID, serverID):
         return False
 
 
-
-def can_add(userID, serverID):
+def can_add(user_id, server_id):
     """
         Guest : True
         Member : True
@@ -109,12 +110,11 @@ def can_add(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            user = collection.find_one({"server": serverID, "user": userID})
+            user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
 
@@ -123,7 +123,8 @@ def can_add(userID, serverID):
     else:
         return False
 
-def can_change_role(userID, serverID):
+
+def can_change_role(user_id, server_id):
     """
         Guest : True
         Member : True
@@ -133,12 +134,11 @@ def can_change_role(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            user = collection.find_one({"server": serverID, "user": userID})
+            user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
 
@@ -147,7 +147,8 @@ def can_change_role(userID, serverID):
     else:
         return False
 
-def can_ban(userID, serverID):
+
+def can_ban(user_id, server_id):
     """
         Guest : True
         Member : True
@@ -157,12 +158,11 @@ def can_ban(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            user = collection.find_one({"server": serverID, "user": userID})
+            user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
 
@@ -171,7 +171,8 @@ def can_ban(userID, serverID):
     else:
         return False
 
-def can_change_channel(userID, serverID):
+
+def can_change_channel(user_id, server_id):
     """
         Guest : True
         Member : True
@@ -181,12 +182,11 @@ def can_change_channel(userID, serverID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
     try:
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
-            user = collection.find_one({"server": serverID, "user": userID})
+            user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
 
@@ -195,7 +195,8 @@ def can_change_channel(userID, serverID):
     else:
         return False
 
-def change_role(userID, serverID, roleID):
+
+def change_role(user_id, server_id, role_id):
     """
         Guest : False
         Member : False
@@ -205,19 +206,17 @@ def change_role(userID, serverID, roleID):
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
-             Raise: ?
     """
-    if can_change_role(userID, serverID):
+    if can_change_role(user_id, server_id):
         try:
             with MongoConnector() as connector:
                 collection = connector.db["role_user"]
                 collection.replace_one(
-                    {"server": serverID, "user": userID},
-                    {"server": serverID, "user": userID, "role": roleID}
+                    {"server": server_id, "user": user_id},
+                    {"server": server_id, "user": user_id, "role": role_id}
                 )
         except Exception as e:
             print(e)
     else:
         print("Erreur. Vous n'avez pas l'autorisation nécessaire afin de changer un rôle.")
         return 1
-

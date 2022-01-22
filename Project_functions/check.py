@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 def checkValidPrenomNom(value):
     """
         ---> Permet de vérifier la validité d'un nom/prénom.
