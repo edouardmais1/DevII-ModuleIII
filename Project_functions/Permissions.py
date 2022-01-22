@@ -197,9 +197,15 @@ def can_change_channel(userID, serverID):
 
 def change_role(userID, serverID, roleID):
     """
-        Guest : True
-        Member : True
-        Admin : True,
+        Guest : False
+        Member : False
+        Admin : False
+
+        ---> Permet de changer le groupe d'un membre si il y est aurotisé.
+
+             Pre: Adresse email d'un utilisateur spécifique. (string)
+             Post: Identifiant d'un serveur spécifique. (string)
+             Raise: ?
     """
     if can_change_role(userID, serverID):
         try:
