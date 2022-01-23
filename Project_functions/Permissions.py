@@ -229,7 +229,7 @@ def change_role(user_id, server_id, role_id):
     """
         Guest : False
         Member : False
-        Admin : False
+        Admin : True
 
         ---> Permet de changer le groupe d'un membre si il y est aurotisé.
 
