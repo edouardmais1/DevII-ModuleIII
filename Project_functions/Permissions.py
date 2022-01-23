@@ -53,17 +53,14 @@ def can_read(user_id, server_id):
         with MongoConnector() as connector:
             collection = connector.db["role_user"]
             user = collection.find_one({"server": server_id, "user": user_id})
-            print(user)
-            print(collection)
-            if user != "":
-                return True
-
-            else:
-                return False
 
     except Exception as e:
         print(e)
 
+    if user is not None:
+        return True
+    else:
+        return False
 
 def can_write(user_id, server_id):
     """
@@ -232,6 +229,3 @@ def change_role(user_id, server_id, role_id):
     else:
         print("Erreur. Vous n'avez pas l'autorisation nécessaire afin de changer un rôle.")
         return 1
-
-
-can_read("serverID", "userID")

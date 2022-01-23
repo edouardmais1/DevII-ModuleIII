@@ -8,9 +8,9 @@ from mongo.mongoConnector import *
 
 class test_checkValidPrenomNom(unittest.TestCase):
     def test_checkValidPrenomNom(self):
-        self.assertEqual(checkValidPrenomNom("Maxime"), True, "True")
-        self.assertEqual(checkValidPrenomNom("Edouard"), True, "True")
-        self.assertEqual(checkValidPrenomNom("Max5"), False, "False")
+        self.assertEqual(checkValidPrenomNom("Maxime"), True, "Maxime est valide")
+        self.assertEqual(checkValidPrenomNom("Edouard"), True, "Edouard est valide")
+        self.assertEqual(checkValidPrenomNom("Max5"), False, "Présence d'un chiffre, non valide")
         self.assertEqual(checkValidPrenomNom("E"), False, "False")
         self.assertEqual(checkValidPrenomNom("zdq*"), False, "False")
 
