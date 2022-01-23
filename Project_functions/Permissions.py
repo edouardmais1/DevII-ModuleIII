@@ -62,6 +62,7 @@ def can_read(user_id, server_id):
     else:
         return False
 
+
 def can_write(user_id, server_id):
     """
         Guest : False
@@ -80,8 +81,11 @@ def can_write(user_id, server_id):
     except Exception as e:
         print(e)
 
-    if 0 < user["role"] < 3:
-        return True
+    if user is not None:
+        if 0 < user["role"] < 3:
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -104,8 +108,11 @@ def can_join_file(user_id, server_id):
     except Exception as e:
         print(e)
 
-    if 0 < user["role"] < 3:
-        return True
+    if user is not None:
+        if 0 < user["role"] < 3:
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -127,8 +134,12 @@ def can_add(user_id, server_id):
             user = collection.find_one({"server": server_id, "user": user_id})
     except Exception as e:
         print(e)
-    if user["role"] == 2:
-        return True
+
+    if user is not None:
+        if user["role"] == 2:
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -151,8 +162,11 @@ def can_change_role(user_id, server_id):
     except Exception as e:
         print(e)
 
-    if user["role"] == 2:
-        return True
+    if user is not None:
+        if user["role"] == 2:
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -175,8 +189,11 @@ def can_ban(user_id, server_id):
     except Exception as e:
         print(e)
 
-    if user["role"] == 2:
-        return True
+    if user is not None:
+        if user["role"] == 2:
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -199,8 +216,11 @@ def can_change_channel(user_id, server_id):
     except Exception as e:
         print(e)
 
-    if user["role"] == 2:
-        return True
+    if user is not None:
+        if user["role"] == 2:
+            return True
+        else:
+            return False
     else:
         return False
 
