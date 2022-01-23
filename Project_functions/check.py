@@ -10,7 +10,7 @@ def checkValidPrenomNom(value):
         return False
     elif set('[~!@#$%^&*()_+{}":;\']+$').intersection(value):
         return False
-    elif len(value) <= 2:
+    elif len(value) < 2:
         return False
     elif len(value) >= 20:
         return False
