@@ -18,7 +18,7 @@ def get_email_validation(email):
     validation_code = randint(1000, 9999)
     sender_address = "noreply@revosta.com"
     receiver_address = email
-    account_password = "3Il1r@c921yrfW9$"
+    account_password = "3Il1r@a#7R6a0uc921yrfW9$"
     subject = "Email verification"
     body = "Bonjour !\n\nEntrez ce code pour verifier votre compte : {}\nRemerciemments,\n\tDevelopers".format(
         validation_code)
