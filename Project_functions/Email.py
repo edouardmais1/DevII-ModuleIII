@@ -4,8 +4,6 @@ import smtplib
 
 
 # ------------------Email Functions---------------------
-
-
 def get_email_validation(email):
     """
     ---> Fonction permettant d'envoyer un mail à l'utilisateur muni d'un code de vérification afin de
@@ -16,9 +14,9 @@ def get_email_validation(email):
     """
     # nombre aléatoire entre 1000 et 9999
     validation_code = randint(1000, 9999)
-    sender_address = "noreply@revosta.com"
+    sender_address = "dev2@revosta.com"
     receiver_address = email
-    account_password = "3Il1r@a#7R6a0uc921yrfW9$"
+    account_password = "ebL6NBzuwb45U6ha"
     subject = "Email verification"
     body = "Bonjour !\n\nEntrez ce code pour verifier votre compte : {}\nRemerciemments,\n\tDevelopers".format(
         validation_code)

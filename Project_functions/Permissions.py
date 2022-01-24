@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 from mongo.mongoConnector import *
 
-"""
-- 0_Guest, 1_Member, 2_Admin --> [1,0,0,0,0,0,0], [1,1,1,0,0,0,0], [1,1,1,1,1,1,1]
-- Crée un serveur, perm de ce serveur ADMIN
-- [lire, écrire, "partage de fichier", ajouter membre, modifier role de qq, supprimer qq, modification de channel]
-"""
-
 
 def on_join(userID, serverID):
     """
@@ -44,7 +38,8 @@ def can_read(user_id, server_id):
         Member : True
         Admin : True
 
-        ---> Autorise la lecture. Pas utile pour le moment, mais dans le futur, peut permettre d'ajouter un groupe muet, et d'interdire à certaines personnes de communiquer.
+        ---> Autorise la lecture. Pas utile pour le moment, mais dans le futur, peut permettre d'ajouter un groupe muet,
+         et d'interdire à certaines personnes de communiquer.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -69,7 +64,7 @@ def can_write(user_id, server_id):
         Member : True
         Admin : True
 
-        ---> Autorise l'écriture au membre si son groupe est l'un des groupes autorisés.
+        ---> Autorise l'écriture au user si son groupe est l'un des groupes autorisés.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -96,7 +91,7 @@ def can_join_file(user_id, server_id):
         Member : True
         Admin : True
 
-        ---> Autorise l'envoie de fichier au membre si son groupe est l'un des groupes autorisés.
+        ---> Autorise l'envoie de fichier au user si son groupe est l'un des groupes autorisés.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -119,11 +114,11 @@ def can_join_file(user_id, server_id):
 
 def can_add(user_id, server_id):
     """
-        Guest : True
-        Member : True
+        Guest : False
+        Member : False
         Admin : True
 
-        ---> Autorise un membre à ajouter des membres au serveur si son groupe y est autorisé.
+        ---> Autorise un user à ajouter des membres au serveur si son groupe y est autorisé.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -146,11 +141,11 @@ def can_add(user_id, server_id):
 
 def can_change_role(user_id, server_id):
     """
-        Guest : True
-        Member : True
+        Guest : False
+        Member : False
         Admin : True
 
-        ---> Autorise un membre à changer le rôles des membres si son groupe y est autorisé.
+        ---> Autorise un user à changer le rôles des membres si son groupe y est autorisé.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -173,11 +168,11 @@ def can_change_role(user_id, server_id):
 
 def can_ban(user_id, server_id):
     """
-        Guest : True
-        Member : True
+        Guest : False
+        Member : False
         Admin : True
 
-        ---> Autorise un membre à bannir des membres du serveur si son groupe y est autorisé.
+        ---> Autorise un user à bannir des membres du serveur si son groupe y est autorisé.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -200,11 +195,11 @@ def can_ban(user_id, server_id):
 
 def can_change_channel(user_id, server_id):
     """
-        Guest : True
-        Member : True
+        Guest : False
+        Member : False
         Admin : True
 
-        ---> Autorise un membre à modifier un canal du serveur si son groupe y est autorisé.
+        ---> Autorise un user à modifier un canal du serveur si son groupe y est autorisé.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
@@ -231,7 +226,7 @@ def change_role(user_id, server_id, role_id):
         Member : False
         Admin : True
 
-        ---> Permet de changer le groupe d'un membre si il y est aurotisé.
+        ---> Permet de changer le groupe d'un user si il y est aurotisé.
 
              Pre: Adresse email d'un utilisateur spécifique. (string)
              Post: Identifiant d'un serveur spécifique. (string)
